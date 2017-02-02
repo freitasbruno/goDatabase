@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+use User;
+use Group;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -54,18 +55,24 @@ class RegisterController extends Controller
         ]);
     }
 
+    
     /**
-     * Create a new user instance after a valid registration.
+     * Create a new user instance after a valid registration, along with his new homeGroup.
      *
      * @param  array  $data
      * @return User
      */
     protected function create(array $data)
     {
+    	$home = new Group;
+    	$home->name = "HOME";
+    	$home->save();
+    	
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'id_home_group' => $home->id,
         ]);
-    }
+    }    
 }

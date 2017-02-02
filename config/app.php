@@ -225,6 +225,22 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        
+        /*
+         * PROJECT MODELS
+         * 
+         */
+         
+        'User' => App\Models\User::class,
+        'Group' => App\Models\Group::class,
+        'Item' => App\Models\Item::class,
+        'UserGroup' => App\Models\UserGroup::class,
+        'AppAddress' => App\Models\AppAddress::class,
+        'AppEmail' => App\Models\AppEmail::class,
+        'AppPhone' => App\Models\AppPhone::class,
+        'AppTask' => App\Models\AppTask::class,
+        'AppTextfield' => App\Models\AppTextfield::class,
+        'AppWebsite' => App\Models\AppWebsite::class,
 
     ],
 
