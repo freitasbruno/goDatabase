@@ -1,76 +1,40 @@
-@extends('layouts.app')
+@extends('layouts.masterBgImage')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Register</div>
-                <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
-                        {{ csrf_field() }}
-
-                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">Name</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
-
-                                @if ($errors->has('name'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
-
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Register
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+	<div class="uk-section uk-text-center">
+    	<div class="uk-container">
+			<div class="uk-card uk-card-default uk-card-hover uk-width-1-4@m uk-position-center">
+			    <div class="uk-card-header uk-card-secondary uk-padding-small">
+			        <h3 class="uk-card-title">REGISTER</h3>
+			    </div>
+			    <div class="uk-card-body uk-padding-small">
+					{!! Form::open(array('url' => 'register', 'class' => 'uk-form')) !!}
+						{!! Form::text('name', '', array('class' => 'uk-input uk-margin-small', 'placeholder' => 'User Name', 'required' => 'required', 'autofocus' => 'autofocus')) !!}
+						@if ($errors->has('name'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('name') }}</strong>
+                            </span>
+                        @endif
+						{!! Form::email('email', '', array('class' => 'uk-input uk-margin-small', 'placeholder' => 'Email Address', 'required' => 'required')) !!}
+						@if ($errors->has('email'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('email') }}</strong>
+                            </span>
+                        @endif
+						{!! Form::password('password', array('class' => 'uk-input uk-margin-small', 'placeholder' => 'Password', 'required' => 'required')) !!}
+						@if ($errors->has('password'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('password') }}</strong>
+                            </span>
+                        @endif
+                        {!! Form::password('password_confirmation', array('class' => 'uk-input uk-margin-small', 'placeholder' => 'Confirm your Password', 'required' => 'required')) !!}
+						{!! Form::submit('GO!', array('class' => 'uk-margin-small uk-button uk-button-default uk-width-1-1 uk-button-primary')) !!}
+					{!! Form::close() !!}
+			    </div>
+			    <div class="uk-card-footer">
+			        <a href="{{ URL::to('login') }}">Already a user? Login here!</a>
+			    </div>
+			</div>
+	    </div>
+	</div>
 @endsection
