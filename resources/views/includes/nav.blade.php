@@ -2,7 +2,9 @@
 <nav class="uk-navbar-container" uk-navbar>
     <!-- left -->
     <div class="uk-navbar-left">
-    	<a class="uk-navbar-item uk-logo" href="/home">GO DATABASE</a>
+    	<div class="uk-logo">
+	    	<a class="uk-navbar-item uk-logo" href="/home">GO DATABASE</a>
+    	</div>
     </div>
     <!-- right -->
     <div class="uk-navbar-right uk-visible@s">
@@ -27,7 +29,7 @@
     </div>
     <div class="uk-navbar-right uk-hidden@s">
 	    <a class="uk-navbar-toggle" href="#offcanvas-slide" uk-toggle>
-            <span uk-navbar-toggle-icon></span> <span class="uk-margin-small-left">Menu</span>
+            <span uk-navbar-toggle-icon></span><span class="uk-margin-small-left">Menu</span>
         </a>
     </div>
 </nav>

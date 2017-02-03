@@ -1,20 +1,26 @@
 @extends('layouts.master')
 
 @section('header')
-
-	<div class="uk-section uk-section-media uk-dark uk-background-cover" style="background-image: url('{!! asset('/images/bg/bg_0'.rand(1, 5).'.jpg') !!}');" uk-height-viewport="expand: true">
-		
-    </div>
-
 @stop
 
 @section('content')
 
-	<div class="uk-section uk-section-secondary uk-text-center">
-    	<div class="uk-container uk-container-small">
-			<h3>WHAT'S NEW?</h3>
-			<h4 class="uk-margin">Welcome to version 1.0 - There are a lot of new and exiting features.</h4>
-		</div>
-	</div>
+	<div class="uk-section uk-padding-remove">
+	    <div class="uk-container uk-container-expand uk-padding-remove">
+	    	<div class="uk-grid uk-margin-remove" uk-grid>
+		    	<div id="groupsDisplay" class="uk-width-1-3@s uk-width-1-5@m uk-width-1-6@l uk-padding-remove" uk-height-viewport="expand: true">
+		    		@include('forms/formNewGroup')
+					@each('includes/groupBtn', $groups, 'group')
+					<!--
+					<button href="#toggle-animation" class="uk-button uk-button-default" type="button" uk-toggle="target: #toggle-animation; animation: uk-animation-slide-left-medium">Toggle</button>
+					<div id="toggle-animation" class="uk-card uk-card-default uk-card-body uk-margin-small">Animation</div>	
+					-->
+		    	</div>
+		    	<div id="itemsDisplay" class="uk-width-expand uk-padding-remove">
+		    		
+		    	</div>
+			</div>
+	    </div>
+    </div>
 
 @stop

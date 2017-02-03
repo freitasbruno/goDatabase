@@ -17,4 +17,13 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+Route::get('home', 'HomeController@index');
+//Route::get('group/{$id}', 'GroupController@index');
+
+Route::get('group/{group_id}', function ($id) {
+	session(['currentGroup' => $id]);
+    $groups = Group::where('id_parent', $id)->get();
+    return view('home', array('groups'=>$groups));
+});
+
+Route::post('newGroup', 'GroupController@create');
