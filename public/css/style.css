@@ -1,3 +1,23 @@
 #groupsDisplay{
-	background-color:#CCC;
+	/*background-color:#1a5276;*/
+	background-color: #2e4053;
+}
+
+#itemsDisplay{
+	/*background-color: #e5e8e8;*/
+	background-color: #f2f4f4; 
+}
+
+.groupBtn:hover{
+	background-color: #34495e;
+}
+
+.uk-logo{
+	background-color: #48c9b0;
+	justify-content: flex-start;
+}
+
+.itemTypePanel {
+	background-color:  #d0d3d4;
+	
 }

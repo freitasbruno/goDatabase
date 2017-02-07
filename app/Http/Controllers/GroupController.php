@@ -13,7 +13,8 @@ class GroupController extends Controller
     {
     	session(['currentGroup' => $id]);
 	    $groups = Group::where('id_parent', $id)->get();
-        return view('group', array('groups'=>$groups));
+	    $currentGroup = Group::find($id);
+        return view('group', array('groups'=>$groups, 'currentGroup'=>$currentGroup));
     }
     
 	public function create()
@@ -23,6 +24,20 @@ class GroupController extends Controller
     	$group->name = Input::get('name');
     	$group->id_parent = $currentGroupId;
 		$group->save();
+        return back();
+    }
+        
+	public function update($id)
+    {
+    	$group = Group::find($id);
+    	$group->name = Input::get('name');
+		$group->save();
+        return back();
+    }
+        
+	public function delete($id)
+    {
+    	$group = Group::destroy($id);
         return back();
     }
 }

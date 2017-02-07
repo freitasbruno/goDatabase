@@ -1,15 +1,11 @@
-@extends('layouts.master')
-
-@section('header')
-
-	<div class="uk-section uk-section-media uk-dark uk-background-cover" style="background-image: url('{!! asset('/images/bg/bg_0'.rand(1, 5).'.jpg') !!}');" uk-height-viewport="expand: true">
-		
-    </div>
-
-@stop
+@extends('layouts.masterBgImage')
 
 @section('content')
-
+	
+	<div class="uk-section uk-light" uk-height-viewport="offset-top: true; offset-bottom: true">
+    
+    </div>
+    
 	<div class="uk-section uk-section-secondary uk-text-center">
     	<div class="uk-container uk-container-small">
 			<h3>WHAT'S NEW?</h3>

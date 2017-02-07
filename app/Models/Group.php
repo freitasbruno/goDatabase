@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
+use Item;
 
 class Group extends Model
 {
@@ -24,5 +25,27 @@ class Group extends Model
      * @var array
      */
     protected $dates = ['deleted_at'];
+    
+    private function groups(){
+    	$groups = Group::where('id_parent', $this->id)->get();
+    	return $groups;
+    }
+	
+    public function items(){
+    	$items = Item::where('id_parent', $this->id)->get();
+    	$sortedItems = array();
+    	
+    	foreach (Item::$types as $type){
+    		${$type} = array();
+    		$sortedItems[$type] = ${$type};
+    	}
+    	
+    	foreach ($items as $item){
+    		if(isset($sortedItems[$item->type])){
+    			array_push($sortedItems[$item->type], $item);
+    		}
+		}
+    	return $sortedItems;
+    }
     
 }

@@ -17,6 +17,7 @@ class CreateItemsTable extends Migration
             $table->increments('id');
             $table->integer('id_parent');
             $table->string('name');
+            $table->string('type');
             $table->softDeletes();
             $table->timestamps();
         });

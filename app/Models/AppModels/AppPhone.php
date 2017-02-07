@@ -4,9 +4,8 @@ namespace App\Models\AppModels;
 
 use Illuminate\Database\Eloquent\Model;
 
-class AppPhone extends Model
+class AppPhone extends AppModel
 {
-	use SoftDeletes;
 	
     /**
      * The attributes that are mass assignable.
@@ -16,13 +15,5 @@ class AppPhone extends Model
     protected $fillable = [
         'id_parent', 'description', 'country_code', 'number', 'extension',
     ];
-     
-
-    /**
-     * The attributes that should be mutated to dates.
-     *
-     * @var array
-     */
-    protected $dates = ['deleted_at'];
     
 }

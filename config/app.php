@@ -239,6 +239,8 @@ return [
         'Group' => App\Models\Group::class,
         'Item' => App\Models\Item::class,
         'UserGroup' => App\Models\UserGroup::class,
+        
+        'AppModel' => App\Models\AppModel::class,
         'AppAddress' => App\Models\AppAddress::class,
         'AppEmail' => App\Models\AppEmail::class,
         'AppPhone' => App\Models\AppPhone::class,

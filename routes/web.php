@@ -23,7 +23,16 @@ Route::get('home', 'HomeController@index');
 Route::get('group/{group_id}', function ($id) {
 	session(['currentGroup' => $id]);
     $groups = Group::where('id_parent', $id)->get();
-    return view('home', array('groups'=>$groups));
+    $currentGroup = Group::find($id);
+    $items = $currentGroup->items();
+    return view('home', array('groups'=>$groups, 'currentGroup'=>$currentGroup, 'items'=>$items));
 });
 
 Route::post('newGroup', 'GroupController@create');
+Route::post('updateGroup/{id}', 'GroupController@update');
+Route::get('deleteGroup/{id}', 'GroupController@delete');
+
+Route::post('newItem', 'ItemController@create');
+Route::post('updateItem/{id}', 'ItemController@update');
+Route::get('deleteItem/{id}', 'ItemController@delete');
+
