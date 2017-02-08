@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class AppEmail extends AppModel
 {
-	
     /**
      * The attributes that are mass assignable.
      *
@@ -15,5 +14,9 @@ class AppEmail extends AppModel
     protected $fillable = [
         'id_parent', 'email', 'description',
     ];
+    
+    public function getName(){
+    	return 'AppEmail';
+    }
 
 }

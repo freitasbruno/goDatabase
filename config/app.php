@@ -239,14 +239,26 @@ return [
         'Group' => App\Models\Group::class,
         'Item' => App\Models\Item::class,
         'UserGroup' => App\Models\UserGroup::class,
+        'UserGroupMember' => App\Models\UserGroupMember::class,
         
-        'AppModel' => App\Models\AppModel::class,
-        'AppAddress' => App\Models\AppAddress::class,
-        'AppEmail' => App\Models\AppEmail::class,
-        'AppPhone' => App\Models\AppPhone::class,
-        'AppTask' => App\Models\AppTask::class,
-        'AppTextfield' => App\Models\AppTextfield::class,
-        'AppWebsite' => App\Models\AppWebsite::class,
+        'SharedGroup' => App\Models\SharedGroup::class,
+        'SharedItem' => App\Models\SharedItem::class,
+        
+        'ItemContact' => App\Models\ItemTypes\ItemContact::class,
+		'ItemCalendarEvent' => App\Models\ItemTypes\ItemCalendarEvent::class,
+		'ItemDocument' => App\Models\ItemTypes\ItemDocument::class,
+		'ItemGeneric' => App\Models\ItemTypes\ItemGeneric::class,
+		'ItemList' => App\Models\ItemTypes\ItemList::class,
+		'ItemTaskList' => App\Models\ItemTypes\ItemTaskList::class,
+		'ItemTimer' => App\Models\ItemTypes\ItemTimer::class,
+        
+        'AppModel' => App\Models\AppModels\AppModel::class,
+        'AppAddress' => App\Models\AppModels\AppAddress::class,
+        'AppEmail' => App\Models\AppModels\AppEmail::class,
+        'AppPhone' => App\Models\AppModels\AppPhone::class,
+        'AppTask' => App\Models\AppModels\AppTask::class,
+        'AppTextfield' => App\Models\AppModels\AppTextfield::class,
+        'AppWebsite' => App\Models\AppModels\AppWebsite::class,
 
     ],
 

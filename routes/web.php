@@ -36,3 +36,27 @@ Route::post('newItem', 'ItemController@create');
 Route::post('updateItem/{id}', 'ItemController@update');
 Route::get('deleteItem/{id}', 'ItemController@delete');
 
+Route::post('newAppAddress', 'AppAddressController@create');
+Route::post('updateAppAddress/{id}', 'AppAddressController@update');
+Route::get('deleteAppAddress/{id}', 'AppAddressController@delete');
+
+Route::post('newAppEmail', 'AppEmailController@create');
+Route::post('updateAppEmail/{id}', 'AppEmailController@update');
+Route::get('deleteAppEmail/{id}', 'AppEmailController@delete');
+
+Route::post('newAppPhone', 'AppPhoneController@create');
+Route::post('updateAppPhone/{id}', 'AppPhoneController@update');
+Route::get('deleteAppPhone/{id}', 'AppPhoneController@delete');
+
+Route::post('newAppWebsite', 'AppWebsiteController@create');
+Route::post('updateAppWebsite/{id}', 'AppWebsiteController@update');
+Route::get('deleteAppWebsite/{id}', 'AppWebsiteController@delete');
+
+Route::post('newAppTextfield', 'AppTextfieldController@create');
+Route::post('updateAppTextfield/{id}', 'AppTextfieldController@update');
+Route::get('deleteAppTextfield/{id}', 'AppTextfieldController@delete');
+
+Route::get('/test', function () {
+    $item = Group::find(2);
+    return $item->items();
+});

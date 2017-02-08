@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAppAddressesTable extends Migration
+class CreateSharedItemsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,13 @@ class CreateAppAddressesTable extends Migration
      */
     public function up()
     {
-        Schema::create('app_addresses', function (Blueprint $table) {
+        Schema::create('shared_items', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_parent');
-            $table->string('description')->nullable();
-            $table->string('address01')->nullable();
-            $table->string('address02')->nullable();
-            $table->string('address03')->nullable();
-            $table->string('city')->nullable();
-            $table->string('country');
+            $table->integer('id_owner');
+            $table->integer('id_user');
+            $table->string('name');
+            $table->enum('privileges', array('view', 'edit'));
             $table->softDeletes();
             $table->timestamps();
         });
@@ -34,6 +32,6 @@ class CreateAppAddressesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('app_addresses');
+        Schema::dropIfExists('shared_items');
     }
 }

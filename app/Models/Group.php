@@ -41,6 +41,7 @@ class Group extends Model
     	}
     	
     	foreach ($items as $item){
+    		$item->apps = $item->appModels();
     		if(isset($sortedItems[$item->type])){
     			array_push($sortedItems[$item->type], $item);
     		}

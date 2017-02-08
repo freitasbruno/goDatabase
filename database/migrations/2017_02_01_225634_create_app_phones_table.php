@@ -16,7 +16,7 @@ class CreateAppPhonesTable extends Migration
         Schema::create('app_phones', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_parent');
-            $table->string('description');
+            $table->string('description')->nullable();
             $table->string('country_code');
             $table->string('number');
             $table->string('extension')->nullable();

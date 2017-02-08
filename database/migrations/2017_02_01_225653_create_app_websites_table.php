@@ -16,7 +16,7 @@ class CreateAppWebsitesTable extends Migration
         Schema::create('app_websites', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_parent');
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->string('url');
             $table->softDeletes();
             $table->timestamps();

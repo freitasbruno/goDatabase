@@ -20,26 +20,29 @@
 	    	<div class="uk-grid uk-margin-remove" uk-grid>
 		    	<div id="groupsDisplay" class="uk-width-1-3@s uk-width-1-5@m uk-width-1-6@l uk-padding-remove" uk-height-viewport="expand: true">
 		    		<div class="uk-light">
-				    	<div class="uk-card uk-padding-small uk-visible-toggle groupBtn">
-							<a href="#toggle-animation" class="uk-link-reset" uk-toggle="target: #toggle-animation; animation: uk-animation-slide-left-medium">+ Add New</a>
-						</div>
-			    		<div id="toggle-animation">	
-				    		<div>
-		    					<div class="uk-card uk-card-body uk-padding-small">
-				    				<p><span uk-icon="icon: plus; ratio:0.7"></span> New Item</p>
-				    				<hr class="uk-divider-small">
-				    				@include('forms/formNewItem')
-					    		</div>
-					    	</div>
-					    	<div>
-		    					<div class="uk-card uk-card-body uk-padding-small">
-				    				<p><span uk-icon="icon: plus; ratio:0.7"></span> New Group</p>
-				    				<hr class="uk-divider-small">
-				    				@include('forms/formNewGroup')
-					    		</div>
-					    	</div>	
-					    	<hr>
-					    </div>	
+		    			<div class="toggleWrapper">
+					    	<div class="uk-card uk-padding-small">
+								<a href="#" class="uk-icon-button toggleBtn" uk-icon="icon: plus"></a>
+								<a href="#" class="uk-button uk-button-text toggleBtn"><span class="uk-margin-small-left">CREATE</span></a>
+							</div>
+				    		<div class="uk-animation-fade uk-hidden togglePanel">	
+					    		<div class="uk-border-rounded createPanel">
+			    					<div class="uk-card uk-card-body uk-padding-small">
+					    				<p><span uk-icon="icon: plus; ratio:0.7"></span> New Item</p>
+					    				<hr class="uk-divider-small">
+					    				@include('forms/formNewItem')
+						    		</div>
+						    	</div>
+						    	<div class="uk-border-rounded createPanel">
+			    					<div class="uk-card uk-card-body uk-padding-small">
+					    				<p><span uk-icon="icon: plus; ratio:0.7"></span> New Group</p>
+					    				<hr class="uk-divider-small">
+					    				@include('forms/formNewGroup')
+						    		</div>
+						    	</div>	
+						    	<hr>
+						    </div>
+					    </div>
 						@each('includes/groupBtn', $groups, 'group')
 					</div>
 				</div>
@@ -55,7 +58,7 @@
 									        <h5>{!! $type !!}</h5>
 									    </div>
 										<div class="uk-card-body">
-											<div class="uk-child-width-1-2@s uk-child-width-1-3@m uk-child-width-1-4@l uk-grid-match" uk-grid>
+											<div class="uk-child-width-1-1@s uk-child-width-1-2@m uk-child-width-1-3@l" uk-grid>
 												@each('includes/itemCard', $items[$type], 'item')						
 											</div>
 									    </div>
@@ -74,6 +77,10 @@
     </div>
 
 <script>
+	
+	$(".toggleBtn").click(function(){
+		$(this).closest(".toggleWrapper").find(".togglePanel").toggleClass("uk-hidden");
+	});
 
 	$(".editBtn").click(function(){
 		var btnId = $(this).attr('id').replace(/[^0-9\.]/g, '');

@@ -13,7 +13,7 @@ class AppPhone extends AppModel
      * @var array
      */
     protected $fillable = [
-        'id_parent', 'description', 'country_code', 'number', 'extension',
+        'id_parent', 'description', 'country_code', 'phone', 'extension',
     ];
     
 }

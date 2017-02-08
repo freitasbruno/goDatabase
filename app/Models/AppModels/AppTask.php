@@ -13,7 +13,7 @@ class AppTask extends AppModel
      * @var array
      */
     protected $fillable = [
-        'id_parent', 'text', 'checked',
+        'id_parent', 'name', 'checked',
     ];
     
 }

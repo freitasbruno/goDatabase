@@ -16,7 +16,7 @@ class CreateAppTasksTable extends Migration
         Schema::create('app_tasks', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_parent');
-            $table->string('text');
+            $table->string('name');
             $table->boolean('complete')->default(false);
             $table->softDeletes();
             $table->timestamps();
