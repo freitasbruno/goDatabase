@@ -1,5 +1,5 @@
 <div>
-	<div class="uk-card uk-box-shadow-medium uk-padding-small uk-margin-bottom uk-border-rounded itemTypePanel">
+	<div class="uk-padding-small uk-margin-bottom uk-border-rounded itemTypePanel">
 		<div class="uk-card-header uk-padding-remove">
 	        <h5>{!! $type !!}</h5>
 	    </div>

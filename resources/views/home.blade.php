@@ -9,11 +9,11 @@
 	    <div class="uk-container uk-container-expand uk-padding-remove">
 	    	<div class="uk-grid uk-margin-remove" uk-grid>
 	    		<div class="uk-width-3-4 uk-width-1-3@s uk-width-1-5@m uk-width-1-6@l uk-padding-remove">
-	    			<div class="uk-logo">
+	    			<div class="uk-logo uk-light topNav">
 				    	<a class="uk-navbar-item uk-logo" href="/home"><span class="uk-margin-right" uk-icon="icon: user"></span>{!! Auth::user()->name !!}</a>
 			    	</div>
 	    		</div>
-	    		<div class="uk-width-expand uk-padding-remove uk-margin-remove">
+	    		<div class="uk-width-expand uk-padding-remove uk-margin-remove uk-light topNav">
 	    			@include('includes/nav')
 	    		</div>	
 			</div>	
@@ -22,8 +22,8 @@
 		    		<div class="uk-light">
 		    			<div class="toggleWrapper">
 					    	<div class="uk-card uk-padding-small">
-								<a href="#" class="uk-icon-button toggleBtn" uk-icon="icon: plus"></a>
-								<a href="#" class="uk-button uk-button-text toggleBtn"><span class="uk-margin-small-left">CREATE</span></a>
+								<a href="#" class="uk-icon preventScroll toggleBtn" uk-icon="icon: plus"></a>
+								<a href="#" class="uk-button uk-button-text preventScroll toggleBtn"><span class="uk-margin-small-left">CREATE</span></a>
 							</div>
 				    		<div class="uk-animation-fade uk-hidden togglePanel">	
 					    		<div class="uk-border-rounded createPanel">
@@ -60,6 +60,17 @@
 			</div>
 	    </div>
     </div>
+    
+    <div id="modal-close" uk-modal>
+	    <div class="uk-modal-dialog uk-modal-body uk-width-1-2@s uk-width-1-4@l">
+	        <button class="uk-modal-close-default" type="button" uk-close></button>
+	        <h4 class="">Move Item To:</h4>
+	        {!! Form::open(array('url' => 'moveItem', 'class' => 'uk-form')) !!}
+				{{ Form::select('group', Item::$types, 'Generic', ['class' => 'uk-select']) }}
+			    {{ Form::submit('SUBMIT', array('class' => 'uk-button uk-button-text uk-margin-top uk-align-right')) }}
+			{!! Form::close() !!}
+	    </div>
+	</div>
 
 <script>
 	
@@ -112,6 +123,7 @@
     $( document ).ready( function( $ ) {
 		
 		preventLinkDefault();
+		toggleAppTaskComplete();
 		
         $( '.ajaxForm' ).submit(function(event) {
         	event.preventDefault();
@@ -155,6 +167,16 @@
 		});
     }
     
+    function toggleAppTaskComplete() {
+		var countComplete = $('.appTaskComplete').children().length;
+        //console.log(count);
+        if(countComplete > 0){
+        	$('.appTaskCompleteOuter').removeClass('uk-hidden');
+        }else{
+        	$('.appTaskCompleteOuter').addClass('uk-hidden');
+        }
+    } 
+    
     function toggleAppTask(taskCard, taskComplete) {
     	taskCard.toggleClass('uk-card-default appSelect');
     	
@@ -167,6 +189,9 @@
         	taskCard.find('.taskIcon').replaceWith('<a class="uk-form-icon taskIcon preventScroll" href="#" uk-icon="icon: minus-circle" onclick="$(this).closest(\'form\').submit()"></a>');
         	taskCard.appendTo(taskCard.closest('.appTaskList').find('.appTaskToDo'));
         }
+        
+        toggleAppTaskComplete();
+         
     }
     
 </script>

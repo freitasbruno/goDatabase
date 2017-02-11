@@ -1,5 +1,5 @@
 <!-- Navigation -->
-<nav class="uk-navbar-container uk-navbar-default" uk-navbar>
+<nav class="uk-navbar-container uk-navbar-transparent" uk-navbar>
     <!-- right -->
     <div class="uk-navbar-right uk-visible@s">
         <ul class="uk-navbar-nav">

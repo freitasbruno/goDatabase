@@ -5,8 +5,9 @@
 				<div class="uk-inline uk-width-1-1 uk-padding uk-padding-remove-vertical uk-visible-toggle">
 					<a class="uk-form-icon taskIcon preventScroll" href="#" uk-icon="icon: {!! $task->complete ? 'plus-circle' : 'minus-circle' !!}" onclick="$(this).closest('form').submit()"></a>
 					{!! $task->complete ? '<s  class="uk-text-muted">' : false !!}<span class="toggleBtn">{!! $task->name !!}</span>{!! $task->complete ? '</s>' : false !!}
-			    	<ul class="uk-hidden-hover uk-iconnav uk-position-right">
-			            <li><a href="/deleteAppTask/{!! $task->id !!}" class="uk-icon-link uk-align-right uk-margin-remove uk-hidden-hover" uk-icon="icon: trash"></a></li>
+			    	<ul class="uk-invisible-hover uk-iconnav uk-position-right">
+			    		<li><a href="/cloneAppTask/{!! $task->id !!}" class="uk-icon-link uk-align-right uk-margin-remove uk-invisible-hover" uk-icon="icon: copy"></a></li>
+			            <li><a href="/deleteAppTask/{!! $task->id !!}" class="uk-icon-link uk-align-right uk-margin-remove uk-invisible-hover" uk-icon="icon: trash"></a></li>
 			        </ul>
 			    </div>
 			{!! Form::close() !!}

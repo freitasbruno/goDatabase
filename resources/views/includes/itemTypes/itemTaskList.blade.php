@@ -14,7 +14,7 @@
 			@endforeach
 			</div>
 			
-			<div class="toggleWrapper uk-margin-small-top">
+			<div class="toggleWrapper uk-margin-small-top appTaskCompleteOuter">
 				<div class="togglePanel">
 		        	<a href="#" class="uk-link-reset uk-text-small preventScroll toggleBtn">
 		        		<span class="uk-margin-small-right" uk-icon="icon: chevron-down"></span><span>Show Complete</span>

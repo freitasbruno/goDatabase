@@ -41,4 +41,12 @@ class AppTaskController extends Controller
     	$app = AppTask::destroy($id);
         return back();
     }
+    
+    public function clone($id)
+    {
+    	$app = AppTask::find($id);
+		$new_app = $app->replicate();
+		$new_app->push();
+        return back();
+    }
 }

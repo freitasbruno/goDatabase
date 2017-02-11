@@ -9,8 +9,10 @@
 	                <h5 class="uk-margin-remove-bottom uk-text-uppercase">{!! $item->name !!}</h5>
 	            </div>
 	            <div class="uk-width-auto uk-margin-right">
-		        	<ul class="uk-hidden-hover uk-iconnav">
-			        	<li><a href="#" id="editItemBtn{!! $item->id !!}" class="uk-icon-link uk-align-right uk-margin-remove uk-invisible-hover toggleBtn" uk-icon="icon: pencil"></a></li>
+		        	<ul class="uk-invisible-hover uk-iconnav">
+		        		<li><a href="#" id="editItemBtn{!! $item->id !!}" class="uk-icon-link uk-align-right uk-margin-remove uk-invisible-hover preventScroll toggleBtn" uk-icon="icon: pencil"></a></li>
+		        		<li><a href="#" class="uk-icon-link uk-align-right uk-margin-remove uk-invisible-hover preventScroll" uk-icon="icon: move" type="button" uk-toggle="target: #modal-close"></a></li>
+			        	<li><a href="/cloneItem/{!! $item->id !!}" class="uk-icon-link uk-align-right uk-margin-remove uk-invisible-hover" uk-icon="icon: copy"></a></li>
 			            <li><a href="/deleteItem/{!! $item->id !!}" class="uk-icon-link uk-align-right uk-margin-remove uk-invisible-hover" uk-icon="icon: trash"></a></li>
 			        </ul>
 			    </div>

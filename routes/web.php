@@ -34,6 +34,8 @@ Route::get('deleteGroup/{id}', 'GroupController@delete');
 
 Route::post('newItem', 'ItemController@create');
 Route::post('updateItem/{id}', 'ItemController@update');
+Route::post('moveItem/{id}', 'ItemController@update');
+Route::get('cloneItem/{id}', 'ItemController@clone');
 Route::get('deleteItem/{id}', 'ItemController@delete');
 
 Route::post('newAppAddress', 'AppAddressController@create');
@@ -56,6 +58,7 @@ Route::get('deleteAppWebsite/{id}', 'AppWebsiteController@delete');
 Route::post('newAppTask', 'AppTaskController@create');
 Route::post('updateAppTask/{id}', 'AppTaskController@update');
 Route::post('toggleAppTask/{id}', 'AppTaskController@toggle');
+Route::get('cloneAppTask/{id}', 'AppTaskController@clone');
 Route::get('deleteAppTask/{id}', 'AppTaskController@delete');
 
 Route::post('newAppTextfield', 'AppTextfieldController@create');

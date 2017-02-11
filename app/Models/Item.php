@@ -39,11 +39,11 @@ class Item extends Model
      */
     public static $types = array(
         'ItemContact' => 'CONTACT',
-        'ItemGeneric' => 'GENERIC',
-        'ItemList' => 'LIST', 
+        //'ItemGeneric' => 'GENERIC',
+        //'ItemList' => 'LIST', 
         'ItemTaskList' => 'TASK LIST',
-        'ItemCalendarEvent' => 'CALENDAR EVENT', 
-        'ItemTimer' => 'TIMER', 
+        //'ItemCalendarEvent' => 'CALENDAR EVENT', 
+        //'ItemTimer' => 'TIMER', 
         'ItemDocument' => 'DOCUMENT'
     ); 
     
