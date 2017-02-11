@@ -52,11 +52,12 @@ Route::post('newAppWebsite', 'AppWebsiteController@create');
 Route::post('updateAppWebsite/{id}', 'AppWebsiteController@update');
 Route::get('deleteAppWebsite/{id}', 'AppWebsiteController@delete');
 
+
+Route::post('newAppTask', 'AppTaskController@create');
+Route::post('updateAppTask/{id}', 'AppTaskController@update');
+Route::post('toggleAppTask/{id}', 'AppTaskController@toggle');
+Route::get('deleteAppTask/{id}', 'AppTaskController@delete');
+
 Route::post('newAppTextfield', 'AppTextfieldController@create');
 Route::post('updateAppTextfield/{id}', 'AppTextfieldController@update');
 Route::get('deleteAppTextfield/{id}', 'AppTextfieldController@delete');
-
-Route::get('/test', function () {
-    $item = Group::find(2);
-    return $item->items();
-});

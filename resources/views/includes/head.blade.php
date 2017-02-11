@@ -4,6 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="A Laravel + Neo4j open source solution for AEC information management.">
     <meta name="author" content="Bruno Freitas">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     <title>GO DATABASE</title>
     
@@ -13,7 +14,6 @@
 	
     <!-- js -->
     {!! Html::script('js/jquery.js') !!}
-    {!! Html::script('js/bootstrap.min.js') !!}
     {!! Html::script('js/uikit.min.js') !!}
     
 </head>

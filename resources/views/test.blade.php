@@ -111,14 +111,11 @@
 	
     $( document ).ready( function( $ ) {
 		
-		preventLinkDefault();
-		
         $( '.ajaxForm' ).submit(function(event) {
         	event.preventDefault();
         	
-        	var formURL = $( this ).attr('action');
+        	var url = "test";
         	var request = $( this ).serialize();
-        	var taskCard = $(this).closest('.appTask');
         	
             //.....
             //show some spinner etc to indicate operation in progress
@@ -126,17 +123,15 @@
             
      		$.ajax({
 		        type: "POST",
-		        url: formURL,
+		        url: './toggleAppTask/1',
 		        data: $( '.ajaxForm' ).serialize(),
 		        success: function() {
 		            console.log("Success");
 		        }
-		    },"json")
+		    })
 	
 	        .done(function(data) {
-	        	toggleAppTask(taskCard, data['taskComplete']);
-	        	preventLinkDefault();
-	        	//document.location.reload(true)
+	            //console.log(data); 
 	        });
             
             //.....
@@ -144,30 +139,9 @@
             //.....
      
             //prevent the form from actually submitting in browser
-            
             return false;
         });
     });
-    
-    function preventLinkDefault() {
-    	$('.preventScroll').click(function(event) {
-		    event.preventDefault();
-		});
-    }
-    
-    function toggleAppTask(taskCard, taskComplete) {
-    	taskCard.toggleClass('uk-card-default appSelect');
-    	
-    	if(taskComplete){
-        	taskCard.find('span:first').wrap('<s class="uk-text-muted">');
-        	taskCard.find('.taskIcon').replaceWith('<a class="uk-form-icon taskIcon preventScroll" href="#" uk-icon="icon: plus-circle" onclick="$(this).closest(\'form\').submit()"></a>');
-        	taskCard.prependTo(taskCard.closest('.appTaskList').find('.appTaskComplete'));
-        }else{
-        	taskCard.find('span:first').unwrap("<s>");
-        	taskCard.find('.taskIcon').replaceWith('<a class="uk-form-icon taskIcon preventScroll" href="#" uk-icon="icon: minus-circle" onclick="$(this).closest(\'form\').submit()"></a>');
-        	taskCard.appendTo(taskCard.closest('.appTaskList').find('.appTaskToDo'));
-        }
-    }
     
 </script>
 

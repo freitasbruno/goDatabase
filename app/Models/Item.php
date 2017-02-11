@@ -38,13 +38,23 @@ class Item extends Model
      * @var array
      */
     public static $types = array(
-        'ItemGeneric' => 'GENERIC', 
-        'ItemContact' => 'CONTACT', 
-        'ItemTaskList' => 'TASK LIST', 
+        'ItemContact' => 'CONTACT',
+        'ItemGeneric' => 'GENERIC',
         'ItemList' => 'LIST', 
+        'ItemTaskList' => 'TASK LIST',
         'ItemCalendarEvent' => 'CALENDAR EVENT', 
         'ItemTimer' => 'TIMER', 
         'ItemDocument' => 'DOCUMENT'
+    ); 
+    
+    public static $icons = array(
+        'GENERIC' => 'album', 
+        'CONTACT' => 'user', 
+        'TASK LIST' => 'check', 
+        'LIST' => 'list', 
+        'CALENDAR EVENT' => 'calendar', 
+        'TIMER' => 'clock', 
+        'DOCUMENT' => 'file-edit'
     ); 
     
     public static $appModels = array(
@@ -52,7 +62,8 @@ class Item extends Model
         'AppEmail' => 'Email', 
         'AppPhone' => 'Phone', 
         'AppWebsite' => 'Website', 
-        'AppTextfield' => 'Textfield'
+        'AppTextfield' => 'Textfield',
+        'AppTask' => 'Task'
     );
     
     //public $apps = array();

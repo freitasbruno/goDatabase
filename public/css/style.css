@@ -3,7 +3,6 @@
 	background-color: #2e4053;
 }
 
-
 #itemsDisplay{
 	/*background-color: #e5e8e8;*/
 	background-color: #f2f4f4; 
@@ -27,7 +26,6 @@
 	margin: 15px;
 }
 
-.createAppPanel{
-	background-color:#d0e0dd;
-	margin: 15px;
+.appSelect:hover{
+	background-color:  #d6dbdf;
 }
