@@ -41,10 +41,12 @@ class ItemController extends Controller
         return back();
     }
     
-    public function move($id)
+    public function move()
     {
-    	return Input::get('group');
-        //return back();
+    	$item = Item::find(Input::get('item_id'));
+    	$item->id_parent = Input::get('group');
+    	$item->save();
+    	return back();
     }
     
     public function clone($id)

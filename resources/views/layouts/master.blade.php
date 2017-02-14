@@ -9,5 +9,7 @@
 		@yield('header')
         @yield('content')
 	</body>
-
+	
+    {!! Html::script('js/go.js') !!}
+    
 </html>

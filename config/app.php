@@ -178,6 +178,7 @@ return [
         App\Providers\RouteServiceProvider::class,
 		
 		Collective\Html\HtmlServiceProvider::class,
+		App\Providers\HelperServiceProvider::class,
     ],
 
     /*
@@ -258,7 +259,9 @@ return [
         'AppPhone' => App\Models\AppModels\AppPhone::class,
         'AppTask' => App\Models\AppModels\AppTask::class,
         'AppTextfield' => App\Models\AppModels\AppTextfield::class,
+        'AppTextarea' => App\Models\AppModels\AppTextarea::class,
         'AppWebsite' => App\Models\AppModels\AppWebsite::class,
+        'AppWImage' => App\Models\AppModels\AppImage::class,
 
     ],
 

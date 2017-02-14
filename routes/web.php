@@ -18,23 +18,16 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('home', 'HomeController@index');
-//Route::get('group/{$id}', 'GroupController@index');
-
-Route::get('group/{group_id}', function ($id) {
-	session(['currentGroup' => $id]);
-    $groups = Group::where('id_parent', $id)->get();
-    $currentGroup = Group::find($id);
-    $items = $currentGroup->items();
-    return view('home', array('groups'=>$groups, 'currentGroup'=>$currentGroup, 'items'=>$items));
-});
+Route::get('group/{id}', 'GroupController@index');
 
 Route::post('newGroup', 'GroupController@create');
 Route::post('updateGroup/{id}', 'GroupController@update');
+Route::post('moveGroup', 'GroupController@move');
 Route::get('deleteGroup/{id}', 'GroupController@delete');
 
 Route::post('newItem', 'ItemController@create');
 Route::post('updateItem/{id}', 'ItemController@update');
-Route::post('moveItem/{id}', 'ItemController@update');
+Route::post('moveItem', 'ItemController@move');
 Route::get('cloneItem/{id}', 'ItemController@clone');
 Route::get('deleteItem/{id}', 'ItemController@delete');
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Input;
 use Group;
+use Item;
 
 class GroupController extends Controller
 {
@@ -14,7 +15,8 @@ class GroupController extends Controller
     	session(['currentGroup' => $id]);
 	    $groups = Group::where('id_parent', $id)->get();
 	    $currentGroup = Group::find($id);
-        return view('group', array('groups'=>$groups, 'currentGroup'=>$currentGroup));
+        $items = $currentGroup->items();
+    	return view('home', array('groups'=>$groups, 'currentGroup'=>$currentGroup, 'items'=>$items));
     }
     
 	public function create()
@@ -40,4 +42,13 @@ class GroupController extends Controller
     	$group = Group::destroy($id);
         return back();
     }
+    
+    public function move()
+    {
+    	$group = Group::find(Input::get('group_id'));
+    	$group->id_parent = Input::get('group');
+    	$group->save();
+    	return back();
+    }
+    
 }

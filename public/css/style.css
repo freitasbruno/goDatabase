@@ -36,3 +36,12 @@
 .topNav, .uk-navbar-container {
 	background-color: #2b7575 !important;
 }
+
+.documentText {
+   overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   line-height: 16px;     /* fallback */
+   max-height: 160px;      /* fallback */
+   -webkit-line-clamp: 5; /* number of lines to show */
+}

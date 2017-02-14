@@ -6,12 +6,12 @@
 	                <span uk-icon="icon: {!! Item::$icons[$item->type] !!}"></span>
 	            </div>
 	            <div class="uk-width-expand uk-padding-small">
-	                <h5 class="uk-margin-remove-bottom uk-text-uppercase">{!! $item->name !!}</h5>
+	                <h5 class="uk-margin-remove-bottom uk-text-uppercase toggleTextEdit">{!! $item->name !!}</h5>
 	            </div>
 	            <div class="uk-width-auto uk-margin-right">
 		        	<ul class="uk-invisible-hover uk-iconnav">
 		        		<li><a href="#" id="editItemBtn{!! $item->id !!}" class="uk-icon-link uk-align-right uk-margin-remove uk-invisible-hover preventScroll toggleBtn" uk-icon="icon: pencil"></a></li>
-		        		<li><a href="#" class="uk-icon-link uk-align-right uk-margin-remove uk-invisible-hover preventScroll" uk-icon="icon: move" type="button" uk-toggle="target: #modal-close"></a></li>
+		        		<li><a href="#" name="{!! $item->id !!}" class="uk-icon-link uk-align-right uk-margin-remove uk-invisible-hover preventScroll moveBtn" uk-icon="icon: move" type="button" uk-toggle="target: #modal-move-item"></a></li>
 			        	<li><a href="/cloneItem/{!! $item->id !!}" class="uk-icon-link uk-align-right uk-margin-remove uk-invisible-hover" uk-icon="icon: copy"></a></li>
 			            <li><a href="/deleteItem/{!! $item->id !!}" class="uk-icon-link uk-align-right uk-margin-remove uk-invisible-hover" uk-icon="icon: trash"></a></li>
 			        </ul>
@@ -30,6 +30,7 @@
 	    @elseif ($item->type == 'CALENDAR EVENT')
 	    @elseif ($item->type == 'TIMER')
 	    @elseif ($item->type == 'DOCUMENT')
+	    	@include('includes/itemTypes/itemDocument')
 	    @endif
     </div>
 </div>

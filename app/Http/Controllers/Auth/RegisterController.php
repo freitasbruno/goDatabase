@@ -68,11 +68,21 @@ class RegisterController extends Controller
     	$home->name = "HOME";
     	$home->save();
     	
+    	$shared = new Group;
+    	$shared->name = "SHARED";
+    	$shared->save();
+    	
+    	$trash = new Group;
+    	$trash->name = "TRASH";
+    	$trash->save();
+    	
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'id_home_group' => $home->id,
+            'id_shared_group' => $shared->id,
+            'id_trash_group' => $trash->id,
         ]);
     }    
 }
