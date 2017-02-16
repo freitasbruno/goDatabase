@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Group;
 use Item;
+use Team;
 
 class HomeController extends Controller
 {
@@ -27,11 +28,13 @@ class HomeController extends Controller
     public function index()
     {
     	$user = Auth::user();
-    	$currentGroup = Group::find($user->id_home_group);
-	    session(['currentGroup' => $currentGroup->id]);
-	    
-	    $groups = Group::where('id_parent', $currentGroup->id)->get();
-	    $items = Item::where('id_parent', $currentGroup->id)->get();
-        return view('home', array('currentGroup'=>$currentGroup, 'groups'=>$groups, 'items'=>$items));
+    	$home = Group::find($user->id_home_group);
+    	$shared = Group::find($user->id_shared_group);
+    	$trash = Group::find($user->id_trash_group);
+    	$pin = Group::find($user->id_pins_group);
+    	$teamsGroup = Team::find($user->id_teams_group);
+    	$groups = [$home, $shared, $trash, $pin];
+    	
+        return view('dashboard', array('groups'=>$groups, 'teamsGroup'=>$teamsGroup));
     }
 }

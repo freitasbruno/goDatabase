@@ -16,6 +16,7 @@ class CreateSharedGroupsTable extends Migration
         Schema::create('shared_groups', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_parent');
+            $table->integer('id_group');
             $table->integer('id_owner');
             $table->integer('id_user');
             $table->string('name');

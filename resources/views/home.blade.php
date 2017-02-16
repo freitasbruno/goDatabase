@@ -4,45 +4,21 @@
 @stop
 
 @section('content')
-
 	<div class="uk-section uk-padding-remove">
 	    <div class="uk-container uk-container-expand uk-padding-remove">
+	    	@include('includes/topbar')
 	    	<div class="uk-grid uk-margin-remove" uk-grid>
-	    		<div class="uk-width-3-4 uk-width-1-3@s uk-width-1-5@m uk-width-1-6@l uk-padding-remove">
-	    			<div class="uk-logo uk-light topNav">
-				    	<a class="uk-navbar-item uk-logo" href="/home"><span class="uk-margin-right" uk-icon="icon: user"></span>{!! Auth::user()->name !!}</a>
-			    	</div>
-	    		</div>
-	    		<div class="uk-width-expand uk-padding-remove uk-margin-remove uk-light topNav">
-	    			@include('includes/nav')
-	    		</div>	
-			</div>	
-	    	<div class="uk-grid uk-margin-remove" uk-grid>
-		    	<div id="groupsDisplay" class="uk-width-1-3@s uk-width-1-5@m uk-width-1-6@l uk-padding-remove" uk-height-viewport="expand: true">
+		    	<div id="groupsDisplay" class="uk-width-2-5@s uk-width-1-4@m uk-width-1-5@l uk-padding-remove" uk-height-viewport="expand: true">
 		    		<div class="uk-light">
-		    			<div class="toggleWrapper">
-					    	<div class="uk-card uk-padding-small">
-								<a href="#" class="uk-icon preventScroll toggleBtn" uk-icon="icon: plus"></a>
-								<a href="#" class="uk-button uk-button-text preventScroll toggleBtn"><span class="uk-margin-small-left">CREATE</span></a>
-							</div>
-				    		<div class="uk-animation-fade uk-hidden togglePanel">	
-					    		<div class="uk-border-rounded createPanel">
-			    					<div class="uk-card uk-card-body uk-padding-small">
-					    				<p><span uk-icon="icon: plus; ratio:0.7"></span> New Item</p>
-					    				<hr class="uk-divider-small">
-					    				@include('forms/formNewItem')
-						    		</div>
-						    	</div>
-						    	<div class="uk-border-rounded createPanel">
-			    					<div class="uk-card uk-card-body uk-padding-small">
-					    				<p><span uk-icon="icon: plus; ratio:0.7"></span> New Group</p>
-					    				<hr class="uk-divider-small">
-					    				@include('forms/formNewGroup')
-						    		</div>
-						    	</div>	
-						    	<hr>
-						    </div>
-					    </div>
+		    			@each('includes/groupBtn', $userGroups, 'group')
+		    			@include('includes/teamBtn', ['team' => $teamsGroup])
+					    <hr class="uk-margin-remove">
+					    @if($currentGroup->id != auth::user()->id_trash_group)
+					    	@include('includes/createGroupBtn')
+					    @endif	
+					    @if($currentGroup->id != auth::user()->id_trash_group && $currentGroup->id != auth::user()->id_pins_group)
+					    	@include('includes/createItemBtn')
+						@endif
 						@each('includes/groupBtn', $groups, 'group')
 					</div>
 				</div>
@@ -71,5 +47,7 @@
     
     @include('forms/modalFormMoveItem')
     @include('forms/modalFormMoveGroup')
+    @include('forms/modalFormShareItem')
+    @include('forms/modalFormShareGroup')
 
 @stop

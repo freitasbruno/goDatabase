@@ -5,9 +5,27 @@ $.ajaxSetup({
     }
 });
 
+$(".toggleIcon").hover(function(){
+	$(this).closest(".toggleIconWrapper").find(".toggleIcon").toggleClass("uk-hidden");
+	},
+	function(){
+	$(this).closest(".toggleIconWrapper").find(".toggleIcon").toggleClass("uk-hidden");
+});
+
+$(".toggleIcon, .toggleIconClose").click(function(){
+	$(this).closest(".toggleIconWrapper").find(".toggleIconNav").toggleClass("uk-hidden");
+});
+
+
+$(".toggleFormBtn").click(function(){
+	$(this).closest(".toggleWrapper").find(".toggleForm").toggleClass("uk-hidden");
+	$(this).closest(".toggleWrapper").find(".toggleField").focus();
+});
+
 $(".toggleBtn").click(function(){
 	$(this).closest(".toggleWrapper").find(".togglePanel").toggleClass("uk-hidden");
 	$(this).closest(".toggleWrapper").find(".toggleField").focus();
+	$('#itemsDisplay').resize()
 });
 
 $(".toggleTextEdit").dblclick(function(){
@@ -17,8 +35,32 @@ $(".toggleTextEdit").dblclick(function(){
 
 $(".toggleField").blur(function(){
 	$(this).closest(".toggleWrapper").find(".togglePanel").toggleClass("uk-hidden");
+	$(this).closest(".toggleWrapper").find(".toggleForm").toggleClass("uk-hidden");
 });
 
+$( '.selectField' ).blur(function(event) {
+    	event.preventDefault();
+});
+
+$('.preventScroll').click(function(event) {
+    event.preventDefault();
+});
+
+
+$(".moveBtn").click(function(){
+	var id = $(this).attr('name');
+	$('#modal-move-item').find($('input[name=item_id]').val(id));
+	$('#modal-move-group').find($('input[name=group_id]').val(id));
+});
+
+
+$(".shareBtn").click(function(){
+	var id = $(this).attr('name');
+	$('#modal-share-item').find($('input[name=item_id]').val(id));
+	$('#modal-share-group').find($('input[name=group_id]').val(id));
+});
+
+preventLinkDefault();
 /*
 $(".formSubmitField").click(function(){
 	$(this).closest(".formSubmitHidden").find(".formSubmitBtn").removeClass("uk-invisible");
@@ -53,15 +95,9 @@ $('.itemBtnForm :input').blur(function(){
 });	
 */
 
-$(".moveBtn").click(function(){
-	var id = $(this).attr('name');
-	$('#modal-move-item').find($('input[name=item_id]').val(id));
-	$('#modal-move-group').find($('input[name=group_id]').val(id));
-});
-
 $( document ).ready( function( $ ) {
 	
-	preventLinkDefault();
+	//preventLinkDefault();
 	toggleAppTaskComplete();
 	
     $( '.ajaxForm' ).submit(function(event) {
@@ -86,7 +122,7 @@ $( document ).ready( function( $ ) {
 
         .done(function(data) {
         	toggleAppTask(taskCard, data['taskComplete']);
-        	preventLinkDefault();
+        	//preventLinkDefault();
         	//document.location.reload(true)
         });
         
@@ -103,7 +139,9 @@ $( document ).ready( function( $ ) {
 function preventLinkDefault() {
 	$('.preventScroll').click(function(event) {
 	    event.preventDefault();
+	    preventLinkDefault();
 	});
+	
 }
 
 function toggleAppTaskComplete() {

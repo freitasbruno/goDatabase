@@ -4,8 +4,9 @@
 		<p class="uk-margin-small-bottom uk-text-center">
 		@foreach(ItemContact::$appModelsSummary as $appClass => $appName)
 			@if (count($item->apps[$appName]) > 0)
+				<div class="uk-text-center toggleWrapper">
 				@each('includes/apps/'.lcfirst($appClass), $item->apps[$appName], 'app')
-				<br>
+				</div>
 			@endif
 		@endforeach
     	</p>
@@ -20,18 +21,23 @@
     			<p class="uk-text-small">
 	    		@foreach(ItemContact::$appModelsExpand as $appClass => $appName)
 	    			@if (count($item->apps[$appName]) > 0)
+	    				<div class="toggleWrapper">
 	    				@each('includes/apps/'.lcfirst($appClass), $item->apps[$appName], 'app')
+	    				</div>
 	    				<br>
 	    			@endif
 	    		@endforeach
 	        	</p>
-	        	<a href="#" class="uk-link-reset uk-text-small preventScroll toggleBtn">
-	        		<p class="uk-text-center"><span class="uk-text-center" uk-icon="icon: chevron-up"></span></p>
-	        	</a>
+	        	<p class="uk-margin-remove-top uk-text-center">
+	        		<a href="#" class="uk-link-reset uk-text-small preventScroll toggleBtn">
+	        		<span uk-icon="icon: chevron-up"></span>
+	        		</a>
+	        	</p>
     		</div>
         </div>
         @endif
         
+        @if($item->privileges != 'view')
         <div class="toggleWrapper">
         	<div class="togglePanel">
 	        	<a href="#" class="uk-link-reset uk-text-small preventScroll toggleBtn">
@@ -47,5 +53,6 @@
 	    	    </a>
     	    </div>
         </div>
+        @endif
     </div>
 </div>

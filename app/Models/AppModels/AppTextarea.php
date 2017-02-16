@@ -4,7 +4,7 @@ namespace App\Models\AppModels;
 
 use Illuminate\Database\Eloquent\Model;
 
-class AppImage extends AppModel
+class AppTextarea extends AppModel
 {
 	
     /**
@@ -13,7 +13,7 @@ class AppImage extends AppModel
      * @var array
      */
     protected $fillable = [
-        'id_parent', 'name', 'path',
+        'id_parent', 'description', 'text',
     ];
     
 }

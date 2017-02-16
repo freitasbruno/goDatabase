@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Country extends Model
 {
-	use SoftDeletes;
 	
     /**
      * The attributes that are mass assignable.
@@ -18,11 +17,23 @@ class Country extends Model
         'iso', 'name', 'nicename', 'phonecode',
     ];
 
-    /**
-     * The attributes that should be mutated to dates.
-     *
-     * @var array
-     */
-    protected $dates = ['deleted_at'];
-
+    public static function countryArray (){
+    	$countries = static::all();
+    	$countriesArray = [];
+    	
+		foreach ($countries as $country) {
+			$countriesArray[$country->name] = $country->iso . " " . $country->nicename;
+		}	
+		return $countriesArray;
+    }
+    
+    public static function countryCodesArray (){
+    	$countries = static::all();
+    	$countriesArray = [];
+    	
+		foreach ($countries as $country) {
+			$countriesArray["+".$country->phonecode] = $country->nicename . " +" . $country->phonecode;
+		}	
+		return $countriesArray;
+    }
 }

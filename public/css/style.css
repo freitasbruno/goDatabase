@@ -12,8 +12,16 @@
 	background-color: #34495e;
 }
 
+.selected{
+	background-color: #3a5068;
+}
+
 .uk-logo{
 	justify-content: flex-start;
+}
+
+.breadcrumbsPanel {
+	background-color:  #2b5275;
 }
 
 .itemTypePanel {

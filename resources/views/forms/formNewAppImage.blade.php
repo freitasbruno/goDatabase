@@ -1,11 +1,9 @@
-{!! Form::open(array('url' => 'newAppTextfield', 'class' => 'uk-form')) !!}
-	{{ Form::hidden('item_id', $item->id) }}
-	
-	{{ Form::label('description', 'Description', ['class' => 'uk-form-label']) }}
-	{!! Form::text('description', null, array('class' => 'uk-input uk-background-muted uk-margin-small-top uk-margin-small-bottom', 'placeholder' => 'Company Name', 'required' => 'required')) !!}
-	
-	{{ Form::label('name', 'Notes', ['class' => 'uk-form-label']) }}
-	{{ Form::textarea('notes', null, array('class' => 'uk-textarea uk-background-muted uk-margin-small-top uk-margin-small-bottom', 'placeholder' => 'Company Name', 'required' => 'required', 'rows' => '3')) }}
-   
-    {{ Form::submit('SUBMIT', array('class' => 'uk-button uk-button-text uk-align-right')) }}
+{!! Form::open(array('url' => 'newAppImage', 'files'=>true, 'class' => 'uk-form')) !!}
+	{!! Form::hidden('item_id', $item->id) !!}
+	<div class="uk-upload uk-width-1-1 uk-margin-small" uk-form-custom>
+		{!! Form::file('upload', array('id' => 'fileInputField')) !!}
+		<input id="imageName" class="uk-input" type="text" placeholder="Attach image thumbnail" disabled>
+	</div>
+	<progress id="progressbar" class="uk-progress uk-margin-remove-top" value="0" max="100" hidden></progress>
+	{!! Form::submit('Send', array('class' => 'uk-button uk-width-1-1')) !!}
 {!! Form::close() !!}

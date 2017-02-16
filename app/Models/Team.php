@@ -5,8 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 
-class UserGroupMember extends Model
+class Team extends Model
 {
+	use SoftDeletes;
 	
     /**
      * The attributes that are mass assignable.
@@ -14,7 +15,7 @@ class UserGroupMember extends Model
      * @var array
      */
     protected $fillable = [
-        'id_user_group', 'id_user'
+        'name', 'id_parent', 'description', 'logo',
     ];
      
 

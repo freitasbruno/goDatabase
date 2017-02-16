@@ -18,7 +18,7 @@ class Group extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'id_parent',
+        'name', 'id_parent', 'icon'
     ];
      
 
@@ -45,6 +45,27 @@ class Group extends Model
     	
     	foreach ($items as $item){
     		$item->apps = $item->appModels();
+    		$item->privileges = 'owner';
+    		if(isset($sortedItems[$item->type])){
+    			array_push($sortedItems[$item->type], $item);
+    		}
+		}
+    	return $sortedItems;
+    }
+    
+    public function sharedItems(){
+    	$sharedItems = SharedItem::where('id_parent', $this->id)->get();
+    	$sortedItems = array();
+    	
+    	foreach (Item::$types as $type){
+    		${$type} = array();
+    		$sortedItems[$type] = ${$type};
+    	}
+    	
+    	foreach ($sharedItems as $sharedItem){
+    		$item = Item::find($sharedItem->id_item); 
+    		$item->apps = $item->appModels();
+    		$item->privileges = $sharedItem->privileges;
     		if(isset($sortedItems[$item->type])){
     			array_push($sortedItems[$item->type], $item);
     		}
@@ -62,21 +83,7 @@ class Group extends Model
     	}
     	return $this;
     }
-    /*
-    public static function groupHierarchySelect ($groups, $i=0){
-    	
-    	$str = '<option name="{!! $group->id !!}>' . str_repeat("--", $i) . ">" . $groups->name . "</option>";
-    	
-    	if(!empty($groups->children)){
-    		$i++;
-    		foreach ($groups->children as $group) {
-				$str .= Group::groupHierarchyStr($group, $i);
-			}
-		}
-		
-		return $str;
-    }
-    */
+    
     public static function flatten(array $array) { 
     	$return = array(); 
     	array_walk_recursive($array, 

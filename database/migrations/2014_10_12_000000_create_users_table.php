@@ -18,6 +18,8 @@ class CreateUsersTable extends Migration
             $table->integer('id_home_group');
             $table->integer('id_shared_group');
             $table->integer('id_trash_group');
+            $table->integer('id_pins_group');
+            $table->integer('id_teams_group');
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');

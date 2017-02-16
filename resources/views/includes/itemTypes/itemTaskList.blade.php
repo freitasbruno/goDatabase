@@ -1,9 +1,11 @@
 <div class="uk-card uk-padding-remove">
 	<div class="uk-padding-small">
 		<div class="uk-card uk-card-body uk-padding-small appTaskList">
-			<div class=" uk-margin-bottom">
-				@include('forms/formNewAppTask')
-			</div>
+			@if($item->privileges != 'view')
+				<div class=" uk-margin-bottom">
+					@include('forms/formNewAppTask')
+				</div>
+			@endif
 			<div class="appTaskToDo">
 			@foreach(Item::$appModels as $appClass => $appName)
 				@foreach($item->apps[$appName] as $task)

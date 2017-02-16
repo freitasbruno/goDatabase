@@ -14,16 +14,16 @@ class ItemContact extends Item
      * @var array
      */
     public static $appModels = array(
-        'AppEmail' => 'Email', 
         'AppPhone' => 'Phone', 
+        'AppEmail' => 'Email', 
         'AppWebsite' => 'Website', 
         'AppAddress' => 'Address', 
         'AppTextfield' => 'Textfield'
     );
     
     public static $icons = array(
-        'AppEmail' => 'mail', 
         'AppPhone' => 'phone', 
+        'AppEmail' => 'mail', 
         'AppWebsite' => 'world', 
         'AppAddress' => 'home', 
         'AppTextfield' => 'file-edit'

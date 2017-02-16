@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserGroupMembersTable extends Migration
+class CreateAppImagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,13 @@ class CreateUserGroupMembersTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_group_members', function (Blueprint $table) {
+        Schema::create('app_images', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_user_group');
-            $table->integer('id_user');
+            $table->integer('id_parent');
+            $table->string('name');
+            $table->string('originalName');
+            $table->string('extension');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -28,6 +31,6 @@ class CreateUserGroupMembersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_group_members');
+        Schema::dropIfExists('app_images');
     }
 }

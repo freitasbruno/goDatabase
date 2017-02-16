@@ -14,7 +14,7 @@ class SharedGroup extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'id_parent', 'id_owner', 'id_user', 'privileges'
+        'name', 'id_parent', 'id_group', 'id_owner', 'id_user', 'privileges'
     ];
      
 

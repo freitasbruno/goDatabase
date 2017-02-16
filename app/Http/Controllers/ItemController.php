@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Input;
+use User;
 use Item;
 use Group;
 use AppAddress;
@@ -12,7 +13,9 @@ use AppPhone;
 use AppTask;
 use AppTextfield;
 use AppWebsite;
+use SharedItem;
 use DB;
+use Auth;
 
 class ItemController extends Controller
 {
@@ -37,7 +40,17 @@ class ItemController extends Controller
         
 	public function delete($id)
     {
-    	$item = Item::destroy($id);
+    	$item = Item::find($id);
+    	$item->id_parent = auth::user()->id_trash_group;
+    	$item->save();
+        return back();
+    }
+    
+    public function restore($id)
+    {
+    	$item = Item::find($id);
+    	$item->id_parent = auth::user()->id_home_group;
+    	$item->save();
         return back();
     }
     
@@ -46,6 +59,30 @@ class ItemController extends Controller
     	$item = Item::find(Input::get('item_id'));
     	$item->id_parent = Input::get('group');
     	$item->save();
+    	return back();
+    }
+    
+    
+    public function share()
+    {
+    	
+    	$item = Item::find(Input::get('item_id'));
+    	$privileges = Input::get('privileges');
+    	$input = Input::get('emails');
+    	$emails = preg_split( "/[\s,;]+/", $input );
+    	
+    	foreach($emails as $email){
+    		$user = User::where('email', $email)->first();
+    		$sharedItem = new SharedItem;
+    		$sharedItem->name = $item->name;
+    		$sharedItem->id_parent = $user->id_shared_group;
+    		$sharedItem->id_item = $item->id;
+    		$sharedItem->id_owner = Auth::user()->id;
+    		$sharedItem->id_user = $user->id;
+    		$sharedItem->privileges = $privileges;
+    		$sharedItem->save();
+    	}
+    	
     	return back();
     }
     

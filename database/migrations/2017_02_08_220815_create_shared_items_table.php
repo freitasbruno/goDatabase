@@ -16,6 +16,7 @@ class CreateSharedItemsTable extends Migration
         Schema::create('shared_items', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_parent');
+            $table->integer('id_item');
             $table->integer('id_owner');
             $table->integer('id_user');
             $table->string('name');

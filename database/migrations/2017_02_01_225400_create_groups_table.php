@@ -17,6 +17,7 @@ class CreateGroupsTable extends Migration
             $table->increments('id');
             $table->integer('id_parent')->default(0);
             $table->string('name');
+            $table->string('icon')->default('folder');
             $table->softDeletes();
             $table->timestamps();
         });

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
+use Item;
 
 class SharedItem extends Model
 {
@@ -14,15 +15,8 @@ class SharedItem extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'id_parent', 'id_owner', 'id_user', 'privileges'
+        'name', 'id_parent', 'id_item', 'id_owner', 'id_user', 'privileges'
     ];
      
-
-    /**
-     * The attributes that should be mutated to dates.
-     *
-     * @var array
-     */
-    protected $dates = ['deleted_at'];
     
 }

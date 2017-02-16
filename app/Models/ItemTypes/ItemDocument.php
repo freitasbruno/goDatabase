@@ -15,11 +15,13 @@ class ItemDocument extends Item
      */
     public static $appModels = array(
     	'AppImage' => 'Image',
+    	'AppFile' => 'File',
         'AppTextarea' => 'Text'
     );
     
     public static $icons = array(
         'AppImage' => 'image', 
+        'AppFile' => 'file',
         'AppTextarea' => 'file-edit'
     );
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use User;
 use Group;
+use Team;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -28,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/dashboard';
 
     /**
      * Create a new controller instance.
@@ -66,15 +67,28 @@ class RegisterController extends Controller
     {
     	$home = new Group;
     	$home->name = "HOME";
+    	$home->icon = "home";
     	$home->save();
     	
     	$shared = new Group;
     	$shared->name = "SHARED";
+    	$shared->icon = "social";
     	$shared->save();
     	
     	$trash = new Group;
     	$trash->name = "TRASH";
+    	$trash->icon = "trash";
     	$trash->save();
+    	
+    	$pin = new Group;
+    	$pin->name = "PINS";
+    	$pin->icon = "star";
+    	$pin->save();
+    	
+    	$teams = new Team;
+    	$teams->name = "TEAMS";
+    	$teams->description = "Default group for storing user teams";
+    	$teams->save();
     	
         return User::create([
             'name' => $data['name'],
@@ -83,6 +97,8 @@ class RegisterController extends Controller
             'id_home_group' => $home->id,
             'id_shared_group' => $shared->id,
             'id_trash_group' => $trash->id,
+            'id_pins_group' => $pin->id,
+            'id_teams_group' => $teams->id,
         ]);
     }    
 }

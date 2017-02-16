@@ -239,8 +239,9 @@ return [
         'User' => App\Models\User::class,
         'Group' => App\Models\Group::class,
         'Item' => App\Models\Item::class,
-        'UserGroup' => App\Models\UserGroup::class,
-        'UserGroupMember' => App\Models\UserGroupMember::class,
+        'Team' => App\Models\Team::class,
+        'TeamMember' => App\Models\TeamMember::class,
+        'Country' => App\Models\Country::class,
         
         'SharedGroup' => App\Models\SharedGroup::class,
         'SharedItem' => App\Models\SharedItem::class,
@@ -261,7 +262,8 @@ return [
         'AppTextfield' => App\Models\AppModels\AppTextfield::class,
         'AppTextarea' => App\Models\AppModels\AppTextarea::class,
         'AppWebsite' => App\Models\AppModels\AppWebsite::class,
-        'AppWImage' => App\Models\AppModels\AppImage::class,
+        'AppImage' => App\Models\AppModels\AppImage::class,
+        'AppFile' => App\Models\AppModels\AppFile::class,
 
     ],
 
