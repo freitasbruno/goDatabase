@@ -4,7 +4,7 @@
 			
 			<div class="uk-width-expand uk-text-bold toggleTextEdit">
 				
-				<a href="/group/{{ $group->id }}" class="uk-link-reset">
+				<a href="{{ URL::to('/group/' . $group->id) }}" class="uk-link-reset">
 					<span class="uk-margin-small-right" uk-icon="icon: {!! $group->icon !!}"></span>
 					{!! $group->name !!}
 				</a>
