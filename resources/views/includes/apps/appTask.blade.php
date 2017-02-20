@@ -9,8 +9,8 @@
 					{!! $task->complete ? '<s  class="uk-text-muted">' : false !!}<span class="{!! $item->privileges != 'view' ? 'toggleBtn' : false !!}">{!! $task->name !!}</span>{!! $task->complete ? '</s>' : false !!}
 			    	@if($item->privileges != 'view')
 			    	<ul class="uk-invisible-hover uk-iconnav uk-position-right">
-			    		<li><a href="/cloneAppTask/{!! $task->id !!}" class="uk-icon-link uk-align-right uk-margin-remove uk-invisible-hover" uk-icon="icon: copy"></a></li>
-			            <li><a href="/deleteAppTask/{!! $task->id !!}" class="uk-icon-link uk-align-right uk-margin-remove uk-invisible-hover" uk-icon="icon: trash"></a></li>
+			    		<li><a href="{{ URL::to('/cloneAppTask/' . $task->id) }}" class="uk-icon-link uk-align-right uk-margin-remove uk-invisible-hover" uk-icon="icon: copy"></a></li>
+			            <li><a href="{{ URL::to('/deleteAppTask/' . $task->id) }}" class="uk-icon-link uk-align-right uk-margin-remove uk-invisible-hover" uk-icon="icon: trash"></a></li>
 			        </ul>
 			        @endif
 			    </div>

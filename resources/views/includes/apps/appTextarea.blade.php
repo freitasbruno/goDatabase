@@ -1,7 +1,7 @@
 <div class="uk-visible-toggle toggleForm">
 	<span class="uk-text-meta">{!! $app->description !!}</span>
 	<a href="#" class="uk-icon-link uk-margin-small-left uk-hidden-hover toggleFormBtn preventScroll" uk-icon="icon: pencil; ratio:0.7"></a>
-	<a href="/deleteAppTextarea/{!! $app->id !!}" class="uk-icon-link uk-hidden-hover" uk-icon="icon: trash; ratio:0.7"></a>
+	<a href="{{ URL::to('/deleteAppTextarea/' . $app->id) }}" class="uk-icon-link uk-hidden-hover" uk-icon="icon: trash; ratio:0.7"></a>
 	<p class="uk-margin-small uk-margin-remove-top toggleTextEdit">{!! $app->text !!}</p>
 </div>
 <div class="uk-hidden toggleForm">

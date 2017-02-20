@@ -2,9 +2,9 @@
 
 	function breadcrumbs($group){
 		if ($group->id_parent == 0){
-			return ("<a href='/group/" . $group->id . "' class='uk-link-reset'>" . $group->name . "</a>");
+			return ("<a href='" . URL::to('/group/' . $group->id ) . "' class='uk-link-reset'>" . $group->name . "</a>");
 		}else{
-			return (breadcrumbs(Group::find($group->id_parent)) . " > <a href='/group/" . $group->id . "' class='uk-link-reset'>" . $group->name . "</a>");
+			return (breadcrumbs(Group::find($group->id_parent)) . " > <a href='" . URL::to('/group/' . $group->id ) . "' class='uk-link-reset'>" . $group->name . "</a>");
 		}
 	}
 	

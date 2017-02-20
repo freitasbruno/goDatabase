@@ -15,7 +15,7 @@
 	        		<li><a href="#" id="editBtn{!! $group->id !!}" class="uk-icon-link uk-align-right uk-margin-remove preventScroll toggleBtn" uk-icon="icon: pencil"></a></li>
 	        		<li><a href="#" name="{!! $group->id !!}" class="uk-icon-link uk-align-right uk-margin-remove preventScroll moveBtn" uk-icon="icon: move" type="button" uk-toggle="target: #modal-move-group"></a></li>
 		            <li><a href="#" name="{!! $group->id !!}" class="uk-icon-link uk-align-right uk-margin-remove preventScroll shareBtn" uk-icon="icon: social" type="button" uk-toggle="target: #modal-share-group"></a></li>
-		            <li><a href="/deleteGroup/{!! $group->id !!}" class="uk-icon-link uk-align-right uk-margin-remove" uk-icon="icon: trash"></a></li>
+		            <li><a href="{{ URL::to('/deleteGroup/' . $group->id) }}" class="uk-icon-link uk-align-right uk-margin-remove" uk-icon="icon: trash"></a></li>
 		        	<li><a href="#" class="uk-icon-link uk-align-right uk-margin-remove preventScroll toggleIconClose" uk-icon="icon: more"></a></li>
 		        </ul>
 		        <ul class="uk-iconnav uk-align-right toggleIconNav">

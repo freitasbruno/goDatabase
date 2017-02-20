@@ -7,7 +7,7 @@
 		@endif
 	</span>
 	<a href="#" class="uk-icon-link uk-margin-small-left uk-hidden-hover toggleFormBtn preventScroll" uk-icon="icon: pencil; ratio:0.7"></a>
-	<a href="/deleteAppAddress/{!! $app->id !!}" class="uk-icon-link uk-hidden-hover" uk-icon="icon: trash; ratio:0.7"></a>
+	<a href="{{ URL::to('/deleteAppAddress/' . $app->id) }}" class="uk-icon-link uk-hidden-hover" uk-icon="icon: trash; ratio:0.7"></a>
 	<br>
 	{!! $app->address01 !!}
 	@if (!empty($app->address02))

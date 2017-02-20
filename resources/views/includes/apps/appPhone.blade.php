@@ -5,7 +5,7 @@
 		{!! ' - ' . $app->extension !!}
 	@endif
 	<a href="#" class="uk-icon-link uk-margin-small-left uk-hidden-hover toggleBtn preventScroll" uk-icon="icon: pencil; ratio:0.7"></a>
-	<a href="/deleteAppPhone/{!! $app->id !!}" class="uk-icon-link uk-hidden-hover" uk-icon="icon: trash; ratio:0.7"></a>
+	<a href="{{ URL::to('/deleteAppPhone/' . $app->id) }}" class="uk-icon-link uk-hidden-hover" uk-icon="icon: trash; ratio:0.7"></a>
 	<br>
 </div>
 <div class="uk-hidden togglePanel">

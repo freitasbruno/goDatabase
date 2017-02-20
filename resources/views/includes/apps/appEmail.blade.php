@@ -3,7 +3,7 @@
 	{!! Html::mailto($app->email, null, ['class' => 'uk-link-reset']) !!}
 	</b>
 	<a href="#" class="uk-icon-link uk-margin-small-left uk-hidden-hover toggleBtn preventScroll" uk-icon="icon: pencil; ratio:0.7"></a>
-	<a href="/deleteAppEmail/{!! $app->id !!}" class="uk-icon-link uk-hidden-hover" uk-icon="icon: trash; ratio:0.7"></a>
+	<a href="{{ URL::to('/deleteAppEmail/' . $app->id) }}" class="uk-icon-link uk-hidden-hover" uk-icon="icon: trash; ratio:0.7"></a>
 </span>
 <div class="uk-hidden togglePanel">
 {!! Form::open(array('url' => 'updateAppEmail/' . $app->id, 'class' => 'uk-form')) !!}

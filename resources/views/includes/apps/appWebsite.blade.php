@@ -3,7 +3,7 @@
 	{!! $app->url !!}
 	</a>
 	<a href="#" class="uk-icon-link uk-margin-small-left uk-hidden-hover toggleFormBtn preventScroll" uk-icon="icon: pencil; ratio:0.7"></a>
-	<a href="/deleteAppWebsite/{!! $app->id !!}" class="uk-icon-link uk-hidden-hover" uk-icon="icon: trash; ratio:0.7"></a>
+	<a href="{{ URL::to('/deleteAppWebsite/' . $app->id) }}" class="uk-icon-link uk-hidden-hover" uk-icon="icon: trash; ratio:0.7"></a>
 </div>
 <div class="uk-hidden toggleForm">
 {!! Form::open(array('url' => 'updateAppWebsite/' . $app->id, 'class' => 'uk-form')) !!}

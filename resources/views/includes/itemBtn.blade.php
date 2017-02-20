@@ -5,7 +5,7 @@
 	</div>
     <div class="uk-accordion-content"> 
     	<a href="#" id="editItemBtn{!! $item->id !!}"  class="uk-icon-link editItemBtn">EDIT</a>
-    	<a href="/deleteItem/{!! $item->id !!}" class="uk-icon-link">DELETE</a>
+    	<a href="{{ URL::to('/deleteItem/' . $item->id) }}" class="uk-icon-link">DELETE</a>
         <p> ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
     </div>
 </li>

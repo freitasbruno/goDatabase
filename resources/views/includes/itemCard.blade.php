@@ -14,7 +14,7 @@
 	            @if($item->id_parent == auth::user()->id_trash_group)
 	            	<div class="uk-width-auto uk-margin-right">
 				        <ul class="uk-iconnav uk-align-right">
-	            			<li><a href="/restoreItem/{!! $item->id !!}" class="uk-icon-link uk-align-right uk-margin-remove" uk-icon="icon: refresh"></a></li>
+	            			<li><a href="{{ URL::to('/restoreItem/' . $item->id) }}" class="uk-icon-link uk-align-right uk-margin-remove" uk-icon="icon: refresh"></a></li>
 			        	</ul>
 				    </div>
 	            @elseif($item->privileges != 'view')
@@ -22,9 +22,9 @@
 			        	<ul class="uk-iconnav uk-hidden toggleIconNav">
 			        		<li><a href="#" id="editItemBtn{!! $item->id !!}" class="uk-icon-link uk-align-right uk-margin-remove preventScroll toggleBtn" uk-icon="icon: pencil"></a></li>
 			        		<li><a href="#" name="{!! $item->id !!}" class="uk-icon-link uk-align-right uk-margin-remove preventScroll moveBtn" uk-icon="icon: move" type="button" uk-toggle="target: #modal-move-item"></a></li>
-				        	<li><a href="/cloneItem/{!! $item->id !!}" class="uk-icon-link uk-align-right uk-margin-remove" uk-icon="icon: copy"></a></li>
+				        	<li><a href="{{ URL::to('/cloneItem/' . $item->id) }}" class="uk-icon-link uk-align-right uk-margin-remove" uk-icon="icon: copy"></a></li>
 				        	<li><a href="#" name="{!! $item->id !!}" class="uk-icon-link uk-align-right uk-margin-remove preventScroll shareBtn" uk-icon="icon: social" type="button" uk-toggle="target: #modal-share-item"></a></li>
-				            <li><a href="/deleteItem/{!! $item->id !!}" class="uk-icon-link uk-align-right uk-margin-remove" uk-icon="icon: trash"></a></li>
+				            <li><a href="{{ URL::to('/deleteItem/' . $item->id) }}" class="uk-icon-link uk-align-right uk-margin-remove" uk-icon="icon: trash"></a></li>
 				        	<li><a href="#" class="uk-icon-link uk-align-right uk-margin-remove preventScroll toggleIconClose" uk-icon="icon: more"></a></li>
 				        </ul>
 				        <ul class="uk-iconnav uk-align-right toggleIconNav">
