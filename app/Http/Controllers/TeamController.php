@@ -63,7 +63,7 @@ class TeamController extends Controller
 
         return view('teams', array('userGroups'=>$userGroups, 'teams'=>$teams, 'teamsGroup'=>$teamsGroup, 'currentTeam'=>$currentTeam));
     }
-    
+
     /**
      * Show the form for creating a new resource.
      *
@@ -93,7 +93,7 @@ class TeamController extends Controller
     public function addTeamMembers(Request $request)
     {
         $teamId = $request->input('teamId');
-        
+
         $input = $request->input('emails');
     	$emails = preg_split( "/[\s,;]+/", $input );
     	$role = $request->input('role');
@@ -112,12 +112,12 @@ class TeamController extends Controller
     	}
     	return back();
     }
-    
+
     public function removeTeamMember($id)
     {
         TeamMember::destroy($id);
         return back();
-    }
+    }    
 
     /**
      * Show the form for editing the specified resource.

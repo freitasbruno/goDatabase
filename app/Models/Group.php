@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Item;
+use Auth;
 
 class Group extends Model
 {
@@ -32,7 +33,8 @@ class Group extends Model
     public function groups(){
     	$groups = Group::where('id_parent', $this->id)->get();
 		foreach ($groups as $group) {
-			$group->privileges = isset($this->privileges) ? $this->privileges : 'owner';
+			$group->privileges = $this->privileges;
+			$group->icon = $group->privileges == 'owner' ? 'folder' : 'social';
 		}
     	return $groups;
     }
@@ -43,6 +45,7 @@ class Group extends Model
 		foreach ($sharedObjects as $sharedObject) {
 			$group = Group::find($sharedObject->id_group);
 			$group->privileges = $sharedObject->privileges;
+			$group->icon = 'social';
 			$sharedGroups = $sharedGroups->push($group);
 		}
 		return $sharedGroups;
@@ -120,7 +123,18 @@ class Group extends Model
 
 		return $groups;
     }
-    
+
+	public function isSharedGroup(){
+		$user = Auth::user();
+		$conditions = ['id_user' => $user->id, 'id_group' => $this->id];
+		$sharedGroup = SharedGroup::where($conditions)->first();
+		return (!empty($sharedGroup));
+	}
+
+	public function getParent(){
+		$user = Auth::user();
+	}
+
     public static function topParent($group){
     	if ($group->id_parent == 0){
     		return $group;
@@ -129,4 +143,20 @@ class Group extends Model
     		return Group::topParent($parent);
     	}
     }
+
+	public static function checkPrivileges($group){
+		$user = Auth::user();
+		if ($group->id == $user->id_home_group || $group->id == $user->id_shared_group || $group->id == $user->id_trash_group || $group->id == $user->id_pins_group){
+			return 'owner';
+		}else{
+			$conditions = ['id_user' => $user->id, 'id_group' => $group->id];
+			$sharedGroup = SharedGroup::where($conditions)->first();
+			if (!empty($sharedGroup)){
+				return $sharedGroup->privileges;
+			}else{
+				$parent = Group::find($group->id_parent);
+				return Group::checkPrivileges($parent);
+			}
+		}
+	}
 }

@@ -9,7 +9,7 @@
 			{{ Form::select('privileges', [null=>'Please Select'] + ['view' => 'User(s) can View', 'edit' => 'User(s) can View and Edit'], null, ['class' => 'uk-select uk-background-muted selectField', 'required' => 'required']) }}
 
 			{{ Form::label('team', 'Share With Team', ['class' => 'uk-form-label']) }}
-			{{ Form::select('team', [null=>'Please Select'] + ['view' => 'User(s) can View', 'edit' => 'User(s) can View and Edit'], null, ['class' => 'uk-select uk-background-muted selectField']) }}
+			{{ Form::select('team', [null=>'Please Select'] + $teamsList, null, ['class' => 'uk-select uk-background-muted selectField']) }}
 
 			{{ Form::label('emails', 'User(s) email(s)', ['class' => 'uk-form-label']) }}
         	{!! Form::text('emails', null, array('class' => 'uk-input uk-background-muted uk-margin-small-top uk-margin-small-bottom', 'placeholder' => 'johndoe@example.com')) !!}

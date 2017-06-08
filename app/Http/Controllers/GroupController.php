@@ -14,16 +14,14 @@ use Auth;
 class GroupController extends Controller
 {
 
-	public function index($id)
+	public function show($id)
     {
     	$user = auth::user();
     	$home = Group::find($user->id_home_group);
-    	$home->privileges = 'owner';
 		$shared = Group::find($user->id_shared_group);
 		$trash = Group::find($user->id_trash_group);
 		$pin = Group::find($user->id_pins_group);
 		$teamsGroup = Team::find($user->id_teams_group);
-
 		$userGroups = array(
 			'home' => $home,
 			'shared' => $shared,
@@ -33,24 +31,22 @@ class GroupController extends Controller
 
     	session(['currentGroup' => $id]);
 	    $currentGroup = Group::find($id);
-	    if (Group::topParent($currentGroup)->id == $user->id_home_group){
-	    	$currentGroup->privileges = 'owner';
-	    }
-
+		$currentGroup->privileges = Group::checkPrivileges($currentGroup);
 		$groups = $currentGroup->groups();
+		foreach ($groups as $group) {
+			$group->privileges = $currentGroup->privileges;
+		}
 		$sharedGroups = $currentGroup->sharedGroups();
 		$groups = $groups->merge($sharedGroups);
 
         $items = $currentGroup->items();
         $sharedItems = $currentGroup->sharedItems();
-
         foreach($sharedItems as $itemType => $collection){
         	foreach($collection as $sharedItem){
 	        	array_push($items[$itemType], $sharedItem);
         	}
         }
-
-    	return view('home', array('groups'=>$groups, 'userGroups'=>$userGroups, 'teamsGroup'=>$teamsGroup, 'currentGroup'=>$currentGroup, 'items'=>$items));
+    	return view('home', array('user'=>$user, 'groups'=>$groups, 'userGroups'=>$userGroups, 'teamsGroup'=>$teamsGroup, 'currentGroup'=>$currentGroup, 'items'=>$items));
     }
 
 	public function create()
@@ -87,11 +83,21 @@ class GroupController extends Controller
 
     public function share()
     {
-
     	$group = Group::find(Input::get('group_id'));
     	$privileges = Input::get('privileges');
-    	$input = Input::get('emails');
-    	$emails = preg_split( "/[\s,;]+/", $input );
+
+		$teamId = Input::get('team');
+		if (!empty($teamId)){
+			$team = Team::find($teamId);
+			$teamMembers = $team->members();
+			$emails = array();
+			foreach ($teamMembers as $user) {
+				$emails[] = $user->email;
+			}
+		}else{
+			$input = Input::get('emails');
+	    	$emails = preg_split( "/[\s,;]+/", $input );
+		}
 
     	foreach($emails as $email){
     		$user = User::where('email', $email)->first();
@@ -107,5 +113,4 @@ class GroupController extends Controller
 
     	return back();
     }
-
 }

@@ -16,6 +16,7 @@ use AppWebsite;
 use SharedItem;
 use DB;
 use Auth;
+use Team;
 
 class ItemController extends Controller
 {
@@ -68,8 +69,19 @@ class ItemController extends Controller
 
     	$item = Item::find(Input::get('item_id'));
     	$privileges = Input::get('privileges');
-    	$input = Input::get('emails');
-    	$emails = preg_split( "/[\s,;]+/", $input );
+
+		$teamId = Input::get('team');
+		if (!empty($teamId)){
+			$team = Team::find($teamId);
+			$teamMembers = $team->members();
+			$emails = array();
+			foreach ($teamMembers as $user) {
+				$emails[] = $user->email;
+			}
+		}else{
+			$input = Input::get('emails');
+	    	$emails = preg_split( "/[\s,;]+/", $input );
+		}
 
     	foreach($emails as $email){
     		$user = User::where('email', $email)->first();

@@ -16,15 +16,20 @@ Route::get('/', function () {
 });
 
 Route::get('/test', function () {
-	$group = Group::find(13);
-	return Group::topParent($group);
+	$teams = Team::userTeams();
+    $teamsList = array();
+
+    foreach ($teams as $team) {
+    	$teamsList[$team->id] = $team->name;
+    }
+    return $teamsList;
 });
 
 Auth::routes();
 
 Route::get('dashboard', 'HomeController@index');
 Route::get('home', 'HomeController@index');
-Route::get('group/{id}', 'GroupController@index');
+Route::get('group/{id}', 'GroupController@show');
 Route::get('sharedGroup/{id}', 'GroupController@showShared');
 
 Route::post('newGroup', 'GroupController@create');
@@ -83,4 +88,3 @@ Route::post('addTeamMembers', 'TeamController@addTeamMembers');
 Route::get('exitTeam/{id}', 'TeamController@removeTeamMember');
 Route::get('deleteTeam/{id}', ['as' => 'teams.delete', 'uses' => 'TeamController@destroy']);
 Route::resource('teams', 'TeamController');
-

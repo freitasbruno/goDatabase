@@ -3,6 +3,11 @@ $user = auth::user();
 $userGroup = Group::find($user->id_home_group);
 $groupsArray = Group::groupHierarchySelect($userGroup->groupHierarchy());
 $groupsArray2 = Group::flatten($groupsArray);
+$teams = Team::userTeams();
+$teamsList = array();
+foreach ($teams as $team) {
+	$teamsList[$team->id] = $team->name;
+}
 ?>
 
 @extends('layouts.master')
@@ -21,9 +26,9 @@ $groupsArray2 = Group::flatten($groupsArray);
 		    			@include('includes/teamBtn', ['team' => $teamsGroup])
 					    <hr class="uk-margin-remove">
 					    <?php  ?>
-					    @if($currentGroup->id != auth::user()->id_trash_group 
-					    	&& $currentGroup->id != auth::user()->id_pins_group 
-					    	&& $currentGroup->id != auth::user()->id_shared_group 
+					    @if($currentGroup->id != auth::user()->id_trash_group
+					    	&& $currentGroup->id != auth::user()->id_pins_group
+					    	&& $currentGroup->id != auth::user()->id_shared_group
 					    	&& $currentGroup->privileges != 'view')
 					    		@include('includes/createGroupBtn')
 					    		@include('includes/createItemBtn')
@@ -33,7 +38,7 @@ $groupsArray2 = Group::flatten($groupsArray);
 				</div>
 
 		    	<div id="itemsDisplay" class="uk-width-expand uk-margin-remove uk-padding-small">
-		    		@include('includes/breadcrumbs')
+		    		@include('includes/breadcrumbs', ['user'=>$user])
 		    		@if(count($items) > 0)
 		    			@foreach(Item::$types as $itemClass => $type)
 		    				@if (!empty($items[$type]))
