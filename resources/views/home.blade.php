@@ -13,16 +13,17 @@
 		    			@each('includes/groupBtn', $userGroups, 'group')
 		    			@include('includes/teamBtn', ['team' => $teamsGroup])
 					    <hr class="uk-margin-remove">
-					    @if($currentGroup->id != auth::user()->id_trash_group)
+					    @if($currentGroup->id != auth::user()->id_trash_group && $currentGroup->privileges != 'view')
 					    	@include('includes/createGroupBtn')
-					    @endif	
-					    @if($currentGroup->id != auth::user()->id_trash_group && $currentGroup->id != auth::user()->id_pins_group)
+					    @endif
+					    @if($currentGroup->id != auth::user()->id_trash_group && $currentGroup->id != auth::user()->id_pins_group && $currentGroup->privileges != 'view')
 					    	@include('includes/createItemBtn')
 						@endif
 						@each('includes/groupBtn', $groups, 'group')
+						{!! $currentGroup->privileges !!}
 					</div>
 				</div>
-		    	
+
 		    	<div id="itemsDisplay" class="uk-width-expand uk-margin-remove uk-padding-small">
 		    		@include('includes/breadcrumbs')
 		    		@if(count($items) > 0)
@@ -32,19 +33,19 @@
 							@endif
 						@endforeach
 					@endif
-					
+
 					<?php
 					$user = auth::user();
 					$userGroup = Group::find($user->id_home_group);
 					$groupsArray = Group::groupHierarchySelect($userGroup->groupHierarchy());
 					$groupsArray2 = Group::flatten($groupsArray);
 					?>
-					
+
 		    	</div>
 			</div>
 	    </div>
     </div>
-    
+
     @include('forms/modalFormMoveItem')
     @include('forms/modalFormMoveGroup')
     @include('forms/modalFormShareItem')

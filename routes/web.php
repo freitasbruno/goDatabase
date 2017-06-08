@@ -72,3 +72,6 @@ Route::get('deleteAppImage/{id}', 'AppImageController@delete');
 Route::post('newAppFile', 'AppFileController@create');
 Route::post('updateAppFile/{id}', 'AppFileController@update');
 Route::get('deleteAppFile/{id}', 'AppFileController@delete');
+
+Route::get('deleteTeam/{id}', ['as' => 'team.delete', 'uses' => 'TeamController@destroy']);
+Route::resource('teams', 'TeamController');

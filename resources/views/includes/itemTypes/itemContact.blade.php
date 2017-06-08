@@ -1,18 +1,20 @@
 <div class="uk-card uk-padding-remove">
 	<div class="uk-card uk-card-body uk-padding-small">
-		
+
 		<p class="uk-margin-small-bottom uk-text-center">
 		@foreach(ItemContact::$appModelsSummary as $appClass => $appName)
 			@if (count($item->apps[$appName]) > 0)
 				<div class="uk-text-center toggleWrapper">
-				@each('includes/apps/'.lcfirst($appClass), $item->apps[$appName], 'app')
+				@foreach ($item->apps[$appName] as $app)
+					@include('includes/apps/'.lcfirst($appClass), ['app' => $app])
+				@endforeach
 				</div>
 			@endif
 		@endforeach
     	</p>
-    	
+
     	@if (count($item->apps['Address']) + count($item->apps['Textfield']) > 0)
-    	
+
         <div class="toggleWrapper">
         	<a href="#" class="uk-link-reset uk-text-small preventScroll toggleBtn">
         		<p class="uk-text-center togglePanel"><span class="uk-margin-small-right" uk-icon="icon: chevron-down"></span></p>
@@ -22,7 +24,9 @@
 	    		@foreach(ItemContact::$appModelsExpand as $appClass => $appName)
 	    			@if (count($item->apps[$appName]) > 0)
 	    				<div class="toggleWrapper">
-	    				@each('includes/apps/'.lcfirst($appClass), $item->apps[$appName], 'app')
+						@foreach ($item->apps[$appName] as $app)
+							@include('includes/apps/'.lcfirst($appClass), ['app' => $app])
+						@endforeach
 	    				</div>
 	    				<br>
 	    			@endif
@@ -36,7 +40,7 @@
     		</div>
         </div>
         @endif
-        
+
         @if($item->privileges != 'view')
         <div class="toggleWrapper">
         	<div class="togglePanel">

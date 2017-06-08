@@ -3,5 +3,7 @@
 	<a href="{!! asset('/uploads/' . $app->name) !!}" class="uk-link-reset" target="blank">
 		{!! $app->originalName !!}
 	</a>
-	<a href="{{ URL::to('/deleteApFile/' . $app->id) }}" class="uk-icon-link uk-hidden-hover" uk-icon="icon: trash; ratio:0.7"></a>
+	@if($item->privileges != 'view')
+		<a href="{{ URL::to('/deleteApFile/' . $app->id) }}" class="uk-icon-link uk-hidden-hover" uk-icon="icon: trash; ratio:0.7"></a>
+	@endif
 </span><br>

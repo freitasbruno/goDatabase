@@ -34,7 +34,8 @@ class HomeController extends Controller
     	$pin = Group::find($user->id_pins_group);
     	$teamsGroup = Team::find($user->id_teams_group);
     	$groups = [$home, $shared, $trash, $pin];
-    	
-        return view('dashboard', array('groups'=>$groups, 'teamsGroup'=>$teamsGroup));
+        $teams = $teamsGroup->teams();
+
+        return view('dashboard', array('groups'=>$groups, 'teams'=>$teams, 'teamsGroup'=>$teamsGroup));
     }
 }

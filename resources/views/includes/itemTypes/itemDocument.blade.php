@@ -2,8 +2,12 @@
 	@each('includes/apps/appImage', $item->apps['Image'], 'app')
     <div class="toggleWrapper uk-padding-small uk-margin-remove">
         <div class="uk-margin-small-bottom togglePanel">
-        	@each('includes/apps/appTextarea', $item->apps['Textarea'], 'app')
-        	@each('includes/apps/appFile', $item->apps['File'], 'app')
+			@foreach ($item->apps['Textarea'] as $app)
+				@include('includes/apps/appTextarea', ['app' => $app])
+			@endforeach
+			@foreach ($item->apps['File'] as $app)
+				@include('includes/apps/appFile', ['app' => $app])
+			@endforeach
         </div>
         <div class="uk-hidden togglePanel">
         	@include('forms/formUpdateAppTextarea', ['app' => $item->apps['Textarea']])

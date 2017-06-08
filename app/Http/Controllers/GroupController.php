@@ -13,7 +13,7 @@ use Auth;
 
 class GroupController extends Controller
 {
-	
+
 	public function index($id)
     {
     	$user = auth::user();
@@ -22,29 +22,33 @@ class GroupController extends Controller
 		$trash = Group::find($user->id_trash_group);
 		$pin = Group::find($user->id_pins_group);
 		$teamsGroup = Team::find($user->id_teams_group);
-		
+
 		$userGroups = array(
 			'home' => $home,
 			'shared' => $shared,
 			'trash' => $trash,
 			'pins' => $pin
 		);
-			
+
     	session(['currentGroup' => $id]);
-	    $groups = Group::where('id_parent', $id)->get();
 	    $currentGroup = Group::find($id);
+
+		$groups = Group::where('id_parent', $id)->get();
+		$sharedGroups = $currentGroup->sharedGroups();
+		$groups = $groups->merge($sharedGroups);
+
         $items = $currentGroup->items();
         $sharedItems = $currentGroup->sharedItems();
-        
+
         foreach($sharedItems as $itemType => $collection){
         	foreach($collection as $sharedItem){
 	        	array_push($items[$itemType], $sharedItem);
         	}
         }
-        
+
     	return view('home', array('groups'=>$groups, 'userGroups'=>$userGroups, 'teamsGroup'=>$teamsGroup, 'currentGroup'=>$currentGroup, 'items'=>$items));
     }
-    
+
 	public function create()
     {
     	$currentGroupId = session('currentGroup');
@@ -54,7 +58,7 @@ class GroupController extends Controller
 		$group->save();
         return back();
     }
-        
+
 	public function update($id)
     {
     	$group = Group::find($id);
@@ -62,13 +66,13 @@ class GroupController extends Controller
 		$group->save();
         return back();
     }
-        
+
 	public function delete($id)
     {
     	$group = Group::destroy($id);
         return back();
     }
-    
+
     public function move()
     {
     	$group = Group::find(Input::get('group_id'));
@@ -76,15 +80,15 @@ class GroupController extends Controller
     	$group->save();
     	return back();
     }
-    
+
     public function share()
     {
-    	
+
     	$group = Group::find(Input::get('group_id'));
     	$privileges = Input::get('privileges');
     	$input = Input::get('emails');
     	$emails = preg_split( "/[\s,;]+/", $input );
-    	
+
     	foreach($emails as $email){
     		$user = User::where('email', $email)->first();
     		$sharedGroup = new SharedGroup;
@@ -96,8 +100,8 @@ class GroupController extends Controller
     		$sharedGroup->privileges = $privileges;
     		$sharedGroup->save();
     	}
-    	
+
     	return back();
     }
-    
+
 }

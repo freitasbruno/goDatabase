@@ -29,7 +29,7 @@ class ItemController extends Controller
 		$item->save();
         return back();
     }
-        
+
 	public function update($id)
     {
     	$item = Item::find($id);
@@ -37,7 +37,7 @@ class ItemController extends Controller
 		$item->save();
         return back();
     }
-        
+
 	public function delete($id)
     {
     	$item = Item::find($id);
@@ -45,7 +45,7 @@ class ItemController extends Controller
     	$item->save();
         return back();
     }
-    
+
     public function restore($id)
     {
     	$item = Item::find($id);
@@ -53,7 +53,7 @@ class ItemController extends Controller
     	$item->save();
         return back();
     }
-    
+
     public function move()
     {
     	$item = Item::find(Input::get('item_id'));
@@ -61,16 +61,16 @@ class ItemController extends Controller
     	$item->save();
     	return back();
     }
-    
-    
+
+
     public function share()
     {
-    	
+
     	$item = Item::find(Input::get('item_id'));
     	$privileges = Input::get('privileges');
     	$input = Input::get('emails');
     	$emails = preg_split( "/[\s,;]+/", $input );
-    	
+
     	foreach($emails as $email){
     		$user = User::where('email', $email)->first();
     		$sharedItem = new SharedItem;
@@ -82,10 +82,10 @@ class ItemController extends Controller
     		$sharedItem->privileges = $privileges;
     		$sharedItem->save();
     	}
-    	
+
     	return back();
     }
-    
+
     public function clone($id)
     {
     	$item = Item::find($id);
@@ -93,7 +93,7 @@ class ItemController extends Controller
 		$new_item->name .= ' copy';
 		$new_item->push();
 		$new_item_id = DB::getPdo()->lastInsertId();
-		
+
 		foreach(Item::$appModels as $appClass => $appName){
 			$apps = $appClass::where('id_parent', $id)->get();
 			foreach($apps as $app){
@@ -102,7 +102,7 @@ class ItemController extends Controller
 				$new_app->push();
 			}
 		}
-		
+
         return back();
     }
 }

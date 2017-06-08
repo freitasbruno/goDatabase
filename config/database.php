@@ -45,7 +45,7 @@ return [
             'port' => env('DB_PORT', '3306'),
             'database' => env('DB_DATABASE', 'go_database'),
             'username' => env('DB_USERNAME', 'goDatabase'),
-            'password' => env('DB_PASSWORD', 'j74aKrNueZrdewwn'),
+            'password' => env('DB_PASSWORD', 'teEvqE43tYuH23eN'),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
             'prefix' => '',
