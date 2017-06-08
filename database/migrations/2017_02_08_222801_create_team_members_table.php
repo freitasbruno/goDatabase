@@ -17,7 +17,7 @@ class CreateTeamMembersTable extends Migration
             $table->increments('id');
             $table->integer('id_team');
             $table->integer('id_user');
-            $table->enum('privileges', array('view', 'edit'));
+            $table->string('role');
             $table->timestamps();
         });
     }

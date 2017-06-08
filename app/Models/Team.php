@@ -9,7 +9,7 @@ use Auth;
 class Team extends Model
 {
 	use SoftDeletes;
-
+	
     /**
      * The attributes that are mass assignable.
      *
@@ -30,8 +30,21 @@ class Team extends Model
 	public function teams()
 	{
 		$user = Auth::user();
-		$teams = Team::where('id_parent', $user->id_teams_group)->get();
+		$teams = Team::where('id_parent', $this->id)->get();
 		return $teams;
+	}
+	    
+	public function members()
+	{
+		$members = TeamMember::where('id_team', $this->id)->get();
+		$users = collect();
+		foreach ($members as $member){
+			$user = User::find($member->id_user);
+			$user->role = $member->role;
+			$user->teamMemberId = $member->id;
+			$users = $users->push($user);
+		}
+		return $users;
 	}
 
 }

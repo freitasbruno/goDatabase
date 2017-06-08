@@ -2,7 +2,7 @@
 	<div class="uk-card uk-padding-small uk-visible-toggle togglePanel groupBtn">
 		<div uk-grid>
 			<div class="uk-width-expand uk-text-bold toggleTextEdit">
-				<a href="{{ url('/teams') }}" class="uk-link-reset">
+				<a href="{{ url('/teams/' . $team->id) }}" class="uk-link-reset">
 					<span class="uk-margin-small-right" uk-icon="icon: users"></span>
 					{!! $team->name !!}
 				</a>

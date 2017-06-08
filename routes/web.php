@@ -15,6 +15,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/test', function () {
+	$members = TeamMember::where('id_team', 3)->get();
+	$users = collect();
+	foreach ($members as $member){
+		$users = $users->push(User::find($member->id_user));
+	}
+	return $users;
+});
+
 Auth::routes();
 
 Route::get('dashboard', 'HomeController@index');
@@ -73,5 +82,8 @@ Route::post('newAppFile', 'AppFileController@create');
 Route::post('updateAppFile/{id}', 'AppFileController@update');
 Route::get('deleteAppFile/{id}', 'AppFileController@delete');
 
-Route::get('deleteTeam/{id}', ['as' => 'team.delete', 'uses' => 'TeamController@destroy']);
+Route::post('addTeamMembers', 'TeamController@addTeamMembers');
+Route::get('exitTeam/{id}', 'TeamController@removeTeamMember');
+Route::get('deleteTeam/{id}', ['as' => 'teams.delete', 'uses' => 'TeamController@destroy']);
 Route::resource('teams', 'TeamController');
+

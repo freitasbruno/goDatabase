@@ -14,7 +14,7 @@ class TeamMember extends Model
      * @var array
      */
     protected $fillable = [
-        'id_team', 'id_user', 'privileges'
+        'id_team', 'id_user', 'role'
     ];
      
 

@@ -13,14 +13,15 @@
 		    			@each('includes/groupBtn', $userGroups, 'group')
 		    			@include('includes/teamBtn', ['team' => $teamsGroup])
 					    <hr class="uk-margin-remove">
-					    @if($currentGroup->id != auth::user()->id_trash_group && $currentGroup->privileges != 'view')
-					    	@include('includes/createGroupBtn')
+					    <?php  ?>
+					    @if($currentGroup->id != auth::user()->id_trash_group 
+					    	&& $currentGroup->id != auth::user()->id_pins_group 
+					    	&& $currentGroup->id != auth::user()->id_shared_group 
+					    	&& $currentGroup->privileges != 'view')
+					    		@include('includes/createGroupBtn')
+					    		@include('includes/createItemBtn')
 					    @endif
-					    @if($currentGroup->id != auth::user()->id_trash_group && $currentGroup->id != auth::user()->id_pins_group && $currentGroup->privileges != 'view')
-					    	@include('includes/createItemBtn')
-						@endif
 						@each('includes/groupBtn', $groups, 'group')
-						{!! $currentGroup->privileges !!}
 					</div>
 				</div>
 
