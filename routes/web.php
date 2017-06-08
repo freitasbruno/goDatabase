@@ -16,12 +16,8 @@ Route::get('/', function () {
 });
 
 Route::get('/test', function () {
-	$members = TeamMember::where('id_team', 3)->get();
-	$users = collect();
-	foreach ($members as $member){
-		$users = $users->push(User::find($member->id_user));
-	}
-	return $users;
+	$group = Group::find(13);
+	return Group::topParent($group);
 });
 
 Auth::routes();
@@ -29,6 +25,7 @@ Auth::routes();
 Route::get('dashboard', 'HomeController@index');
 Route::get('home', 'HomeController@index');
 Route::get('group/{id}', 'GroupController@index');
+Route::get('sharedGroup/{id}', 'GroupController@showShared');
 
 Route::post('newGroup', 'GroupController@create');
 Route::post('updateGroup/{id}', 'GroupController@update');

@@ -119,6 +119,14 @@ class Group extends Model
     	}
 
 		return $groups;
-
+    }
+    
+    public static function topParent($group){
+    	if ($group->id_parent == 0){
+    		return $group;
+    	}else{
+    		$parent = Group::find($group->id_parent);
+    		return Group::topParent($parent);
+    	}
     }
 }

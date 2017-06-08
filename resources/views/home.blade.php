@@ -1,3 +1,10 @@
+<?php
+$user = auth::user();
+$userGroup = Group::find($user->id_home_group);
+$groupsArray = Group::groupHierarchySelect($userGroup->groupHierarchy());
+$groupsArray2 = Group::flatten($groupsArray);
+?>
+
 @extends('layouts.master')
 
 @section('header')
@@ -34,14 +41,6 @@
 							@endif
 						@endforeach
 					@endif
-
-					<?php
-					$user = auth::user();
-					$userGroup = Group::find($user->id_home_group);
-					$groupsArray = Group::groupHierarchySelect($userGroup->groupHierarchy());
-					$groupsArray2 = Group::flatten($groupsArray);
-					?>
-
 		    	</div>
 			</div>
 	    </div>

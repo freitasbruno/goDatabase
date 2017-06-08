@@ -58,7 +58,7 @@ class TeamController extends Controller
 	        foreach ($memberTeams as $memberTeam){
 	        	$teams = $teams->push(Team::find($memberTeam->id_team));
 	        }
-	        $teams = $teams->unique($team->id);
+	        $teams = $teams->unique();
         }
 
         return view('teams', array('userGroups'=>$userGroups, 'teams'=>$teams, 'teamsGroup'=>$teamsGroup, 'currentTeam'=>$currentTeam));

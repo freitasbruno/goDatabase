@@ -33,8 +33,11 @@ class GroupController extends Controller
 
     	session(['currentGroup' => $id]);
 	    $currentGroup = Group::find($id);
+	    if (Group::topParent($currentGroup)->id == $user->id_home_group){
+	    	$currentGroup->privileges = 'owner';
+	    }
 
-		$groups = Group::where('id_parent', $id)->get();
+		$groups = $currentGroup->groups();
 		$sharedGroups = $currentGroup->sharedGroups();
 		$groups = $groups->merge($sharedGroups);
 
