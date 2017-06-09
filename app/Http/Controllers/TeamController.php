@@ -60,18 +60,10 @@ class TeamController extends Controller
 	        }
 	        $teams = $teams->unique();
         }
+        session(['currentGroup' => 0]);
+		session(['currentTeam' => $id]);
 
         return view('teams', array('userGroups'=>$userGroups, 'teams'=>$teams, 'teamsGroup'=>$teamsGroup, 'currentTeam'=>$currentTeam));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -82,10 +74,12 @@ class TeamController extends Controller
      */
     public function store(Request $request)
     {
+        $user = Auth::user();
         $currentTeamId = $request->input('currentTeamId');
     	$team = new Team;
     	$team->name = $request->input('name');
     	$team->id_parent = $currentTeamId;
+        $team->id_owner = $user->id;
 		$team->save();
         return back();
     }
@@ -117,7 +111,7 @@ class TeamController extends Controller
     {
         TeamMember::destroy($id);
         return back();
-    }    
+    }
 
     /**
      * Show the form for editing the specified resource.

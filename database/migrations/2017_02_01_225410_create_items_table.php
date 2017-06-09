@@ -16,7 +16,7 @@ class CreateItemsTable extends Migration
         Schema::create('items', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_parent');
-            $table->integer('id_owner');
+            $table->integer('id_owner')->default(0);
             $table->string('name');
             $table->string('type');
             $table->softDeletes();

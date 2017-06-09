@@ -5,7 +5,7 @@
 
 #itemsDisplay{
 	/*background-color: #e5e8e8;*/
-	background-color: #f2f4f4; 
+	background-color: #f2f4f4;
 }
 
 .groupBtn:hover{
@@ -41,7 +41,7 @@
 	background-color:  #d6dbdf;
 }
 
-.topNav, .uk-navbar-container {
+.topNav {
 	background-color: #2b7575 !important;
 }
 

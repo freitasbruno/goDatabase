@@ -15,28 +15,23 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/test', function () {
-	$teams = Team::userTeams();
-    $teamsList = array();
-
-    foreach ($teams as $team) {
-    	$teamsList[$team->id] = $team->name;
-    }
-    return $teamsList;
-});
-
 Auth::routes();
 
-Route::get('dashboard', 'HomeController@index');
-Route::get('home', 'HomeController@index');
-Route::get('group/{id}', 'GroupController@show');
-Route::get('sharedGroup/{id}', 'GroupController@showShared');
+Route::get('/test', function () {
+    $user = Auth::user();
+    $conditions = ['id_user' => $user->id, 'id_group' => 17];
+    $sharedGroup = SharedGroup::where($conditions)->first();
+    //return $sharedGroup;
+    return (!empty($sharedGroup)) ? "is shared" : "not shared";
+});
 
-Route::post('newGroup', 'GroupController@create');
+Route::get('dashboard', 'HomeController@index');
+
 Route::post('updateGroup/{id}', 'GroupController@update');
 Route::post('moveGroup', 'GroupController@move');
 Route::post('shareGroup', 'GroupController@share');
 Route::get('deleteGroup/{id}', 'GroupController@delete');
+Route::resource('groups', 'GroupController');
 
 Route::post('newItem', 'ItemController@create');
 Route::post('updateItem/{id}', 'ItemController@update');
@@ -86,5 +81,5 @@ Route::get('deleteAppFile/{id}', 'AppFileController@delete');
 
 Route::post('addTeamMembers', 'TeamController@addTeamMembers');
 Route::get('exitTeam/{id}', 'TeamController@removeTeamMember');
-Route::get('deleteTeam/{id}', ['as' => 'teams.delete', 'uses' => 'TeamController@destroy']);
+Route::get('deleteTeam/{id}', 'TeamController@destroy');
 Route::resource('teams', 'TeamController');

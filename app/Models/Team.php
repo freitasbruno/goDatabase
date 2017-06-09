@@ -16,7 +16,7 @@ class Team extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'id_parent', 'description', 'logo',
+        'name', 'id_parent', 'id_owner', 'description', 'logo',
     ];
 
     /**

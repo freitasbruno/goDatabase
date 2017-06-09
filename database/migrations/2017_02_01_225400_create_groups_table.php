@@ -16,7 +16,7 @@ class CreateGroupsTable extends Migration
         Schema::create('groups', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_parent')->default(0);
-            $table->integer('id_owner');
+            $table->integer('id_owner')->default(0);
             $table->string('name');
             $table->string('icon')->default('folder');
             $table->softDeletes();

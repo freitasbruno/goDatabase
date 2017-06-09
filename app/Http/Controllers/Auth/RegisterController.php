@@ -56,7 +56,7 @@ class RegisterController extends Controller
         ]);
     }
 
-    
+
     /**
      * Create a new user instance after a valid registration, along with his new homeGroup.
      *
@@ -65,32 +65,33 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $user = new User();
     	$home = new Group;
     	$home->name = "HOME";
     	$home->icon = "home";
     	$home->save();
-    	
+
     	$shared = new Group;
     	$shared->name = "SHARED";
     	$shared->icon = "social";
     	$shared->save();
-    	
+
     	$trash = new Group;
     	$trash->name = "TRASH";
     	$trash->icon = "trash";
     	$trash->save();
-    	
+
     	$pin = new Group;
     	$pin->name = "PINS";
     	$pin->icon = "star";
     	$pin->save();
-    	
+
     	$teams = new Team;
     	$teams->name = "TEAMS";
     	$teams->description = "Default group for storing user teams";
     	$teams->save();
-    	
-        return User::create([
+
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
@@ -100,5 +101,18 @@ class RegisterController extends Controller
             'id_pins_group' => $pin->id,
             'id_teams_group' => $teams->id,
         ]);
-    }    
+
+        $home->id_owner = $user->id;
+        $home->save();
+        $shared->id_owner = $user->id;
+        $shared->save();
+        $trash->id_owner = $user->id;
+        $trash->save();
+        $pin->id_owner = $user->id;
+        $pin->save();
+        $teams->id_owner = $user->id;
+        $teams->save();
+
+        return $user;
+    }
 }

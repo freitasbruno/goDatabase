@@ -9,6 +9,7 @@ use SharedGroup;
 use Item;
 use User;
 use Team;
+use TeamMember;
 use Auth;
 
 class GroupController extends Controller
@@ -16,20 +17,8 @@ class GroupController extends Controller
 
 	public function show($id)
     {
-    	$user = auth::user();
-    	$home = Group::find($user->id_home_group);
-		$shared = Group::find($user->id_shared_group);
-		$trash = Group::find($user->id_trash_group);
-		$pin = Group::find($user->id_pins_group);
-		$teamsGroup = Team::find($user->id_teams_group);
-		$userGroups = array(
-			'home' => $home,
-			'shared' => $shared,
-			'trash' => $trash,
-			'pins' => $pin
-		);
-
     	session(['currentGroup' => $id]);
+		session(['currentTeam' => 0]);
 	    $currentGroup = Group::find($id);
 		$currentGroup->privileges = Group::checkPrivileges($currentGroup);
 		$groups = $currentGroup->groups();
@@ -46,15 +35,17 @@ class GroupController extends Controller
 	        	array_push($items[$itemType], $sharedItem);
         	}
         }
-    	return view('home', array('user'=>$user, 'groups'=>$groups, 'userGroups'=>$userGroups, 'teamsGroup'=>$teamsGroup, 'currentGroup'=>$currentGroup, 'items'=>$items));
+    	return view('home', array('groups'=>$groups, 'currentGroup'=>$currentGroup, 'items'=>$items));
     }
 
-	public function create()
+	public function store()
     {
+		$user = Auth::user();
     	$currentGroupId = session('currentGroup');
     	$group = new Group;
     	$group->name = Input::get('name');
     	$group->id_parent = $currentGroupId;
+		$group->id_owner = $user->id;
 		$group->save();
         return back();
     }
@@ -69,15 +60,33 @@ class GroupController extends Controller
 
 	public function delete($id)
     {
-    	$group = Group::destroy($id);
-        return back();
+		$user = Auth::user();
+		$group = Item::find($id);
+		if ($group->id_owner == $user->id){
+			$group->id_parent = $user->id_trash_group;
+			$group->save();
+		}else{
+			$conditions = ['id_user' => $user->id, 'id_group' => $id];
+			$sharedGroup = SharedGroup::where($conditions)->first();
+			$sharedGroup->id_parent = $user->id_trash_group;
+			$sharedGroup->save();
+		}
+		return back();
     }
 
     public function move()
     {
+		$user = Auth::user();
     	$group = Group::find(Input::get('group_id'));
-    	$group->id_parent = Input::get('group');
-    	$group->save();
+		if ($group->id_owner == $user->id){
+			$group->id_parent = Input::get('group');
+	    	$group->save();
+		}else{
+			$conditions = ['id_user' => $user->id, 'id_group' => $group->id];
+			$sharedGroup = SharedGroup::where($conditions)->first();
+			$sharedGroup->id_parent = Input::get('group');
+			$sharedGroup->save();
+		}
     	return back();
     }
 

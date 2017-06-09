@@ -22,17 +22,15 @@ foreach ($teams as $team) {
 	    	<div class="uk-grid uk-margin-remove" uk-grid>
 		    	<div id="groupsDisplay" class="uk-width-2-5@s uk-width-1-4@m uk-width-1-5@l uk-padding-remove" uk-height-viewport="expand: true">
 		    		<div class="uk-light">
-		    			@each('includes/groupBtn', $userGroups, 'group')
-		    			@include('includes/teamBtn', ['team' => $teamsGroup])
-					    <hr class="uk-margin-remove">
-					    <?php  ?>
-					    @if($currentGroup->id != auth::user()->id_trash_group
-					    	&& $currentGroup->id != auth::user()->id_pins_group
-					    	&& $currentGroup->id != auth::user()->id_shared_group
-					    	&& $currentGroup->privileges != 'view')
-					    		@include('includes/createGroupBtn')
-					    		@include('includes/createItemBtn')
-					    @endif
+						@include('includes/userGroupsBtns')
+						<hr class="uk-margin-remove">
+						@if($currentGroup->id != auth::user()->id_trash_group
+						    && $currentGroup->id != auth::user()->id_pins_group
+						    && $currentGroup->id != auth::user()->id_shared_group
+						    && $currentGroup->privileges != 'view')
+						        @include('includes/createGroupBtn')
+						        @include('includes/createItemBtn')
+						@endif
 						@each('includes/groupBtn', $groups, 'group')
 					</div>
 				</div>

@@ -162,7 +162,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-        
+
         /*
          * Package Service Providers...
          */
@@ -176,7 +176,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-		
+
 		Collective\Html\HtmlServiceProvider::class,
 		App\Providers\HelperServiceProvider::class,
     ],
@@ -230,12 +230,14 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Input' => Illuminate\Support\Facades\Input::class,
-        
+
+        'StoreUser' => App\Http\Middleware\StoreUser::class,
+
         /*
          * PROJECT MODELS
-         * 
+         *
          */
-         
+
         'User' => App\Models\User::class,
         'Group' => App\Models\Group::class,
         'Item' => App\Models\Item::class,
@@ -243,10 +245,10 @@ return [
         'TeamMember' => App\Models\TeamMember::class,
         'Country' => App\Models\Country::class,
         'Notification' => App\Models\Notification::class,
-        
+
         'SharedGroup' => App\Models\SharedGroup::class,
         'SharedItem' => App\Models\SharedItem::class,
-        
+
         'ItemContact' => App\Models\ItemTypes\ItemContact::class,
 		'ItemCalendarEvent' => App\Models\ItemTypes\ItemCalendarEvent::class,
 		'ItemDocument' => App\Models\ItemTypes\ItemDocument::class,
@@ -254,7 +256,7 @@ return [
 		'ItemList' => App\Models\ItemTypes\ItemList::class,
 		'ItemTaskList' => App\Models\ItemTypes\ItemTaskList::class,
 		'ItemTimer' => App\Models\ItemTypes\ItemTimer::class,
-        
+
         'AppModel' => App\Models\AppModels\AppModel::class,
         'AppAddress' => App\Models\AppModels\AppAddress::class,
         'AppEmail' => App\Models\AppModels\AppEmail::class,

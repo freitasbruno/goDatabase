@@ -2,12 +2,12 @@
 <nav class="uk-navbar-container uk-navbar-transparent" uk-navbar>
     <!-- right -->
     <div class="uk-navbar-right uk-visible@s">
-        <ul class="uk-navbar-nav">
-            <li><a href="{{ url('/home') }}">HOME</a></li>
+        <ul class="uk-navbar-nav uk-text-bold">
         	@if (Auth::guest())
         		<li><a href="{{ url('/register') }}">REGISTER</a></li>
         		<li><a href="{{ url('/login') }}">LOGIN</a></li>
             @else
+                <li><a href="{{ url('/dashboard') }}">DASHBOARD</a></li>
         		<li>
         			<a href="{{ url('/logout') }}"
 	        			onclick="event.preventDefault();

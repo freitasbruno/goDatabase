@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class SharedItem extends Model
 {
-
     /**
      * The attributes that are mass assignable.
      *

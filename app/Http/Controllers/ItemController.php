@@ -22,11 +22,13 @@ class ItemController extends Controller
 {
 	public function create()
     {
+		$user = Auth::user();
     	$currentGroupId = session('currentGroup');
     	$item = new Item;
     	$item->name = Input::get('name');
     	$item->type = Item::$types[Input::get('type')];
     	$item->id_parent = $currentGroupId;
+		$item->id_owner = $user->id;
 		$item->save();
         return back();
     }
@@ -41,32 +43,55 @@ class ItemController extends Controller
 
 	public function delete($id)
     {
+		$user = Auth::user();
     	$item = Item::find($id);
-    	$item->id_parent = auth::user()->id_trash_group;
-    	$item->save();
+		if ($item->id_owner == $user->id){
+			$item->id_parent = $user->id_trash_group;
+			$item->save();
+		}else{
+			$conditions = ['id_user' => $user->id, 'id_item' => $id];
+			$sharedItem = SharedItem::where($conditions)->first();
+			$sharedItem->id_parent = $user->id_trash_group;
+			$sharedItem->save();
+		}
         return back();
     }
 
     public function restore($id)
     {
+		$user = Auth::user();
     	$item = Item::find($id);
-    	$item->id_parent = auth::user()->id_home_group;
-    	$item->save();
+		if ($item->id_owner == $user->id){
+			$item->id_parent = $user->id_home_group;
+			$item->save();
+		}else{
+			$conditions = ['id_user' => $user->id, 'id_item' => $id];
+			$sharedItem = SharedItem::where($conditions)->first();
+			$sharedItem->id_parent = $user->id_home_group;
+			$sharedItem->save();
+		}
         return back();
     }
 
     public function move()
     {
+		$user = Auth::user();
     	$item = Item::find(Input::get('item_id'));
-    	$item->id_parent = Input::get('group');
-    	$item->save();
+		if ($item->id_owner == $user->id){
+			$item->id_parent = Input::get('group');
+	    	$item->save();
+		}else{
+			$conditions = ['id_user' => $user->id, 'id_item' => $item->id];
+			$sharedItem = SharedItem::where($conditions)->first();
+			$sharedItem->id_parent = Input::get('group');
+			$sharedItem->save();
+		}
     	return back();
     }
 
 
     public function share()
     {
-
     	$item = Item::find(Input::get('item_id'));
     	$privileges = Input::get('privileges');
 
@@ -100,9 +125,11 @@ class ItemController extends Controller
 
     public function clone($id)
     {
+		$user = Auth::user();
     	$item = Item::find($id);
 		$new_item = $item->replicate();
 		$new_item->name .= ' copy';
+		$new_item->id_owner = $user->id;
 		$new_item->push();
 		$new_item_id = DB::getPdo()->lastInsertId();
 

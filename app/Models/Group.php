@@ -10,6 +10,7 @@ use Auth;
 
 class Group extends Model
 {
+	use SoftDeletes;
 
 	public $children = [];
 
@@ -146,7 +147,7 @@ class Group extends Model
 
 	public static function checkPrivileges($group){
 		$user = Auth::user();
-		if ($group->id == $user->id_home_group || $group->id == $user->id_shared_group || $group->id == $user->id_trash_group || $group->id == $user->id_pins_group){
+		if ($group->id_owner == $user->id){
 			return 'owner';
 		}else{
 			$conditions = ['id_user' => $user->id, 'id_group' => $group->id];

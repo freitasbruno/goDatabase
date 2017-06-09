@@ -21,11 +21,15 @@
 	            	<div class="uk-width-auto uk-margin-right toggleIconWrapper">
 			        	<ul class="uk-iconnav uk-hidden toggleIconNav">
 			        		<li><a href="#" id="editItemBtn{!! $item->id !!}" class="uk-icon-link uk-align-right uk-margin-remove preventScroll toggleBtn" uk-icon="icon: pencil"></a></li>
-			        		<li><a href="#" name="{!! $item->id !!}" class="uk-icon-link uk-align-right uk-margin-remove preventScroll moveBtn" uk-icon="icon: move" type="button" uk-toggle="target: #modal-move-item"></a></li>
-				        	<li><a href="{{ URL::to('/cloneItem/' . $item->id) }}" class="uk-icon-link uk-align-right uk-margin-remove" uk-icon="icon: copy"></a></li>
+                            @if($item->id_owner == Auth::user()->id || $item->isSharedItem())
+			        		    <li><a href="#" name="{!! $item->id !!}" class="uk-icon-link uk-align-right uk-margin-remove preventScroll moveBtn" uk-icon="icon: move" type="button" uk-toggle="target: #modal-move-item"></a></li>
+                            @endif
+                            <li><a href="{{ URL::to('/cloneItem/' . $item->id) }}" class="uk-icon-link uk-align-right uk-margin-remove" uk-icon="icon: copy"></a></li>
 				        	<li><a href="#" name="{!! $item->id !!}" class="uk-icon-link uk-align-right uk-margin-remove preventScroll shareBtn" uk-icon="icon: social" type="button" uk-toggle="target: #modal-share-item"></a></li>
-				            <li><a href="{{ URL::to('/deleteItem/' . $item->id) }}" class="uk-icon-link uk-align-right uk-margin-remove" uk-icon="icon: trash"></a></li>
-				        	<li><a href="#" class="uk-icon-link uk-align-right uk-margin-remove preventScroll toggleIconClose" uk-icon="icon: more"></a></li>
+                            @if($item->id_owner == Auth::user()->id || $item->isSharedItem())
+                                <li><a href="{{ URL::to('/deleteItem/' . $item->id) }}" class="uk-icon-link uk-align-right uk-margin-remove" uk-icon="icon: trash"></a></li>
+                            @endif
+                            <li><a href="#" class="uk-icon-link uk-align-right uk-margin-remove preventScroll toggleIconClose" uk-icon="icon: more"></a></li>
 				        </ul>
 				        <ul class="uk-iconnav uk-align-right toggleIconNav">
 	            			<li><a href="#" class="uk-icon-link uk-align-right uk-margin-remove preventScroll toggleIcon" uk-icon="icon: more-vertical"></a></li>
