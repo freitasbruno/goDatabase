@@ -242,6 +242,7 @@ return [
         'Team' => App\Models\Team::class,
         'TeamMember' => App\Models\TeamMember::class,
         'Country' => App\Models\Country::class,
+        'Notification' => App\Models\Notification::class,
         
         'SharedGroup' => App\Models\SharedGroup::class,
         'SharedItem' => App\Models\SharedItem::class,
