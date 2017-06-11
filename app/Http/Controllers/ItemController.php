@@ -57,22 +57,6 @@ class ItemController extends Controller
         return back();
     }
 
-    public function restore($id)
-    {
-		$user = Auth::user();
-    	$item = Item::find($id);
-		if ($item->id_owner == $user->id){
-			$item->id_parent = $user->id_home_group;
-			$item->save();
-		}else{
-			$conditions = ['id_user' => $user->id, 'id_item' => $id];
-			$sharedItem = SharedItem::where($conditions)->first();
-			$sharedItem->id_parent = $user->id_home_group;
-			$sharedItem->save();
-		}
-        return back();
-    }
-
     public function move()
     {
 		$user = Auth::user();

@@ -61,7 +61,7 @@ class GroupController extends Controller
 	public function delete($id)
     {
 		$user = Auth::user();
-		$group = Item::find($id);
+		$group = Group::find($id);
 		if ($group->id_owner == $user->id){
 			$group->id_parent = $user->id_trash_group;
 			$group->save();
@@ -72,6 +72,22 @@ class GroupController extends Controller
 			$sharedGroup->save();
 		}
 		return back();
+    }
+
+    public function restore($id)
+    {
+		$user = Auth::user();
+    	$group = Group::find($id);
+		if ($group->id_owner == $user->id){
+			$group->id_parent = $user->id_home_group;
+			$group->save();
+		}else{
+			$conditions = ['id_user' => $user->id, 'id_item' => $id];
+			$sharedItem = SharedGroup::where($conditions)->first();
+			$sharedItem->id_parent = $user->id_home_group;
+			$sharedItem->save();
+		}
+        return back();
     }
 
     public function move()
@@ -92,6 +108,7 @@ class GroupController extends Controller
 
     public function share()
     {
+		$currentUser = Auth::user();
     	$group = Group::find(Input::get('group_id'));
     	$privileges = Input::get('privileges');
 
@@ -101,7 +118,9 @@ class GroupController extends Controller
 			$teamMembers = $team->members();
 			$emails = array();
 			foreach ($teamMembers as $user) {
-				$emails[] = $user->email;
+				if ($user->email != $currentUser->email){
+					$emails[] = $user->email;					
+				}
 			}
 		}else{
 			$input = Input::get('emails');

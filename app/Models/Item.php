@@ -42,10 +42,10 @@ class Item extends Model
     	'ItemTaskList' => 'TASK LIST',
     	'ItemDocument' => 'DOCUMENT',
         'ItemContact' => 'CONTACT',
-        'ItemGeneric' => 'GENERIC',
-        'ItemList' => 'LIST',
-        'ItemCalendarEvent' => 'CALENDAR EVENT',
-        'ItemTimer' => 'TIMER',
+        //'ItemGeneric' => 'GENERIC',
+        //'ItemList' => 'LIST',
+        //'ItemCalendarEvent' => 'CALENDAR EVENT',
+        //'ItemTimer' => 'TIMER',
     );
 
     public static $icons = array(

@@ -37,7 +37,7 @@ class Group extends Model
 			$group->privileges = $this->privileges;
 			$group->icon = $group->privileges == 'owner' ? 'folder' : 'social';
 		}
-    	return $groups;
+    	return $groups->sortBy('name');
     }
 
 	public function sharedGroups(){
@@ -68,6 +68,14 @@ class Group extends Model
     			array_push($sortedItems[$item->type], $item);
     		}
 		}
+
+		foreach (Item::$types as $type){
+			usort($sortedItems[$type], function($a, $b)
+			{
+			    return strcmp($a->name, $b->name);
+			});
+    	}
+
     	return $sortedItems;
     }
 

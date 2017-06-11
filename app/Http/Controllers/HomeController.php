@@ -27,15 +27,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-    	$user = Auth::user();
-    	$home = Group::find($user->id_home_group);
-    	$shared = Group::find($user->id_shared_group);
-    	$trash = Group::find($user->id_trash_group);
-    	$pin = Group::find($user->id_pins_group);
-    	$teamsGroup = Team::find($user->id_teams_group);
-    	$groups = [$home, $shared, $trash, $pin];
-        $teams = $teamsGroup->teams();
-
-        return view('dashboard', array('groups'=>$groups, 'teams'=>$teams, 'teamsGroup'=>$teamsGroup));
+        return view('dashboard');
     }
 }

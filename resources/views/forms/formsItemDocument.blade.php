@@ -1,7 +1,7 @@
 <div class="uk-animation-fade uk-hidden togglePanel">
     <ul class="uk-iconnav uk-margin-top" uk-tab>
     	@foreach(ItemDocument::$appModels as $appClass => $appName)
-	    <li><a href="#" uk-icon="icon: {!! ItemDocument::$icons[$appClass] !!}"></a></li>
+	    <li><a href="#" title="{!!$appName!!}" uk-tooltip uk-icon="icon: {!! ItemDocument::$icons[$appClass] !!}"></a></li>
 	    @endforeach
 	</ul>
 	<ul class="uk-switcher">
@@ -18,8 +18,3 @@
 	</ul>
 	<hr class="uk-invisible">
 </div>
-			
-			
-			
-			
-			

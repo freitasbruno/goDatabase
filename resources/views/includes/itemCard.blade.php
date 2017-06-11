@@ -20,14 +20,14 @@
 	            @elseif($item->privileges != 'view')
 	            	<div class="uk-width-auto uk-margin-right toggleIconWrapper">
 			        	<ul class="uk-iconnav uk-hidden toggleIconNav">
-			        		<li><a href="#" id="editItemBtn{!! $item->id !!}" class="uk-icon-link uk-align-right uk-margin-remove preventScroll toggleBtn" uk-icon="icon: pencil"></a></li>
+			        		<li><a href="#" id="editItemBtn{!! $item->id !!}" class="uk-icon-link uk-align-right uk-margin-remove preventScroll toggleBtn" title="Edit" uk-tooltip uk-icon="icon: pencil"></a></li>
                             @if($item->id_owner == Auth::user()->id || $item->isSharedItem())
-			        		    <li><a href="#" name="{!! $item->id !!}" class="uk-icon-link uk-align-right uk-margin-remove preventScroll moveBtn" uk-icon="icon: move" type="button" uk-toggle="target: #modal-move-item"></a></li>
+			        		    <li><a href="#" name="{!! $item->id !!}" class="uk-icon-link uk-align-right uk-margin-remove preventScroll moveBtn" title="Move" uk-tooltip uk-icon="icon: move" type="button" uk-toggle="target: #modal-move-item"></a></li>
                             @endif
-                            <li><a href="{{ URL::to('/cloneItem/' . $item->id) }}" class="uk-icon-link uk-align-right uk-margin-remove" uk-icon="icon: copy"></a></li>
-				        	<li><a href="#" name="{!! $item->id !!}" class="uk-icon-link uk-align-right uk-margin-remove preventScroll shareBtn" uk-icon="icon: social" type="button" uk-toggle="target: #modal-share-item"></a></li>
+                            <li><a href="{{ URL::to('/cloneItem/' . $item->id) }}" class="uk-icon-link uk-align-right uk-margin-remove" title="Duplicate" uk-tooltip uk-icon="icon: copy"></a></li>
+				        	<li><a href="#" name="{!! $item->id !!}" class="uk-icon-link uk-align-right uk-margin-remove preventScroll shareBtn" title="Share" uk-tooltip uk-icon="icon: social" type="button" uk-toggle="target: #modal-share-item"></a></li>
                             @if($item->id_owner == Auth::user()->id || $item->isSharedItem())
-                                <li><a href="{{ URL::to('/deleteItem/' . $item->id) }}" class="uk-icon-link uk-align-right uk-margin-remove" uk-icon="icon: trash"></a></li>
+                                <li><a href="{{ URL::to('/deleteItem/' . $item->id) }}" class="uk-icon-link uk-align-right uk-margin-remove" title="Delete" uk-tooltip uk-icon="icon: trash"></a></li>
                             @endif
                             <li><a href="#" class="uk-icon-link uk-align-right uk-margin-remove preventScroll toggleIconClose" uk-icon="icon: more"></a></li>
 				        </ul>

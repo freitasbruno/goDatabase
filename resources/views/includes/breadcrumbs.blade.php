@@ -25,9 +25,15 @@
         <div>
             <a class="uk-navbar-toggle" uk-search-icon href="#"></a>
             <div class="uk-drop" uk-drop="mode: click; pos: left-center; offset: 0">
+				{!! Form::open(array('url' => 'search', 'class' => 'uk-search uk-search-navbar uk-width-1-1')) !!}
+					{!! Form::hidden('currentGroup', $currentGroup->id) !!}
+						{!! Form::search('searchString', null, array('class' => 'uk-search-input', 'placeholder' => 'Search...', 'autofocus' => 'autofocus')) !!}
+				{!! Form::close() !!}
+				{{--
                 <form class="uk-search uk-search-navbar uk-width-1-1">
                     <input class="uk-search-input" type="search" placeholder="Search..." autofocus>
                 </form>
+				--}}
             </div>
         </div>
     </div>

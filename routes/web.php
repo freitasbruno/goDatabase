@@ -18,12 +18,11 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/test', function () {
-    $user = Auth::user();
-    $conditions = ['id_user' => $user->id, 'id_group' => 17];
-    $sharedGroup = SharedGroup::where($conditions)->first();
-    //return $sharedGroup;
-    return (!empty($sharedGroup)) ? "is shared" : "not shared";
+    $collection = collect([2, 4, 6, 8, 4]);
+    return $collection->search(4);
 });
+
+Route::post('search', 'SearchController@search');
 
 Route::get('dashboard', 'HomeController@index');
 
@@ -31,6 +30,7 @@ Route::post('updateGroup/{id}', 'GroupController@update');
 Route::post('moveGroup', 'GroupController@move');
 Route::post('shareGroup', 'GroupController@share');
 Route::get('deleteGroup/{id}', 'GroupController@delete');
+Route::get('restoreGroup/{id}', 'GroupController@restore');
 Route::resource('groups', 'GroupController');
 
 Route::post('newItem', 'ItemController@create');

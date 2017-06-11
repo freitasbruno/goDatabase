@@ -26,7 +26,7 @@
 	    @elseif ($type == 'DOCUMENT')
 	    	<div class="uk-child-width-1-1@s uk-child-width-1-3@m uk-child-width-1-4@l" uk-grid>
 	    @endif
-				@each('includes/itemCard', $items[$type], 'item')
+				@each('includes/itemBtn', $items[$type], 'item')						
 			</div>
 	    </div>
 	</div>
